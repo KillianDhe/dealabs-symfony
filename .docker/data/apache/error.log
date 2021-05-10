@@ -1,0 +1,12 @@
+[Mon May 10 10:12:14.697223 2021] [ssl:info] [pid 16:tid 140151020466240] AH01883: Init: Initialized OpenSSL library
+[Mon May 10 10:12:14.712483 2021] [ssl:info] [pid 16:tid 140151020466240] AH01883: Init: Initialized OpenSSL library
+[Mon May 10 10:12:14.713823 2021] [mpm_event:notice] [pid 16:tid 140151020466240] AH00489: Apache/2.4.25 (Debian) OpenSSL/1.0.2u configured -- resuming normal operations
+[Mon May 10 10:12:14.713869 2021] [core:notice] [pid 16:tid 140151020466240] AH00094: Command line: '/usr/sbin/apache2 -D FOREGROUND -e info'
+[Mon May 10 10:22:13.804360 2021] [ssl:info] [pid 16:tid 139883849003072] AH01883: Init: Initialized OpenSSL library
+[Mon May 10 10:22:13.819222 2021] [ssl:info] [pid 16:tid 139883849003072] AH01883: Init: Initialized OpenSSL library
+[Mon May 10 10:22:13.820402 2021] [mpm_event:notice] [pid 16:tid 139883849003072] AH00489: Apache/2.4.25 (Debian) OpenSSL/1.0.2u configured -- resuming normal operations
+[Mon May 10 10:22:13.820438 2021] [core:notice] [pid 16:tid 139883849003072] AH00094: Command line: '/usr/sbin/apache2 -D FOREGROUND -e info'
+[Mon May 10 10:26:16.442495 2021] [ssl:info] [pid 16:tid 139714550677568] AH01883: Init: Initialized OpenSSL library
+[Mon May 10 10:26:16.448997 2021] [ssl:info] [pid 16:tid 139714550677568] AH01883: Init: Initialized OpenSSL library
+[Mon May 10 10:26:16.449656 2021] [mpm_event:notice] [pid 16:tid 139714550677568] AH00489: Apache/2.4.25 (Debian) OpenSSL/1.0.2u configured -- resuming normal operations
+[Mon May 10 10:26:16.449668 2021] [core:notice] [pid 16:tid 139714550677568] AH00094: Command line: '/usr/sbin/apache2 -D FOREGROUND -e info'
