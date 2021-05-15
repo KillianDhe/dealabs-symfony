@@ -14,7 +14,18 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-    <H1>HELLO</H1>
+    <h2 id="ki" class="col-auto">hello2</h2>
+    <div class="flex-column flex-grow-1">
+        <h1 class="h-100">hello</h1>
+    </div>
+        {% block body %}
+
+        {% endblock %}
     </body>
 </html>
+
+<script>
+    $(document).ready(function() {
+        console.log($("#hello"));
+    })
+</script>
