@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if deals is empty %}
+        <h1>Aucun deal, tristesse</h1>
+    {% endif %}
+    {% for deal in deals %}
+        <h1>{{ deal.titre }}</h1>
+        <h3>{{ deal.description }}</h3>
+    {% endfor %}
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
