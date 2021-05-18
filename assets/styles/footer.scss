@@ -1,0 +1,38 @@
+.footerDealabs {
+  padding: 5px;
+  margin-top: auto;
+  bottom: 0;
+  background-color: #1d1f20;
+  color: #8f949b;
+  font-size: 90%;
+}
+
+.footerDealabs .container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+
+.footerDealabs--title {
+  font-weight: bold;
+  font-size: 110%;
+  color: whitesmoke;
+}
+
+.footerDealabs--icon {
+  height: 40px;
+  min-height: 40px;
+  width: 40px;
+  min-width: 40px;
+  margin: 10px;
+}
+.footerDealabs--icon svg {
+  height: 100%;
+  width: 100%;
+}
+
+.footerDealabs--title-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

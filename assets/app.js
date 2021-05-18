@@ -7,12 +7,12 @@
 
 // any CSS you import will output into a single css file (app.scss in this case)
 import './styles/app.scss';
+import './styles/header.scss';
+import './styles/footer.scss';
+
+require('@fortawesome/fontawesome-free/css/all.min.css');
+require('@fortawesome/fontawesome-free/js/all.js');
 
 // start the Stimulus application
 import './bootstrap';
 import $ from 'jquery';
-
-// $ global pour pouvoir utililser jquery dans les pages
-global.$ = global.jQuery = $;
-
-console.log('Hello je suis le webpack');
