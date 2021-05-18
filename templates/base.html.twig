@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="shortcut icon" href="/build/images/favicon/favicon.ico" type="image/x-icon">
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
@@ -14,18 +15,17 @@
         {% endblock %}
     </head>
     <body>
-    <h2 id="ki" class="col-auto">hello2</h2>
-    <div class="flex-column flex-grow-1">
-        <h1 class="h-100">hello</h1>
-    </div>
-        {% block body %}
+    {% include 'header.html' %}
+    <div class="appcontent">
+        <div class="container">
+            {% block body %}
 
-        {% endblock %}
+            {% endblock %}
+        </div>
+        {% include 'footer.html' %}
+    </div>
     </body>
 </html>
 
 <script>
-    $(document).ready(function() {
-        console.log($("#hello"));
-    })
 </script>
