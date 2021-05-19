@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}Error 404{% endblock %}
+
+{% block body %}
+    <div style="height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column; row-gap: 30px;">
+        <div style="display: flex; flex-direction: column; row-gap: 10px; align-items: center;">
+            <i class="fas fa-grin-beam-sweat" style="font-size: 100px; color: #02A5C1;"></i>
+            <div style="text-align: center">
+                <h1>Aaargl ! On a cassé un truc</h1>
+                <h4>La page que vous essayez d'afficher est partie en fumée.</h4>
+            </div>
+        </div>
+        <div>
+            <a class="btn btn-primary" href="/">Retourner à l'accueil</a>
+        </div>
+    </div>
+{% endblock %}
