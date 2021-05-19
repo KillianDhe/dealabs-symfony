@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210515174109 extends AbstractMigration
+final class Version20210519073403 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,12 +20,12 @@ final class Version20210515174109 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        //$this->addSql('ALTER TABLE deal ADD type_reduction ENUM(\'pourcentage\', \'montant\',\'livraisonGratuite\')');
+        $this->addSql('ALTER TABLE deal ADD date_creation DATE NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE deal DROP type_reduction');
+        $this->addSql('ALTER TABLE deal DROP date_creation');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\BonPlan;
+use App\Entity\CodePromo;
 use App\Entity\Groupe;
 use App\Entity\Partenaire;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -10,7 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class BonPlanFormType extends AbstractType
+class CodePromoFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -20,29 +20,29 @@ class BonPlanFormType extends AbstractType
             ->add('LienDuDeal')
             ->add('CodePromo')
             ->add('isExpire')
-            ->add('Prix')
-            ->add('PrixHabituel')
-            ->add('FraisDePort')
-            ->add('isLivraisonGratuite')
+            ->add('Montant')
+            ->add('typeReduction')
+            ->add('groupes')
+            ->add('partenaires')
             ->add('groupes', EntityType::class, [
                 'class' => Groupe::class,
                 'choice_label' => 'nom',
                 'multiple' => true,
                 "expanded" => true,
             ])
-        ->add('partenaires', EntityType::class, [
-            'class' => Partenaire::class,
-            'choice_label' => 'nom',
-            'multiple' => true,
-            "expanded" => true,
-        ]);
+            ->add('partenaires', EntityType::class, [
+                'class' => Partenaire::class,
+                'choice_label' => 'nom',
+                'multiple' => true,
+                "expanded" => true,
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => BonPlan::class,
+            'data_class' => CodePromo::class,
         ]);
     }
 }

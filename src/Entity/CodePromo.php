@@ -22,7 +22,7 @@ class CodePromo extends Deal
      */
     private $Montant;
 
-    /** @ORM\Column(type="string", columnDefinition="ENUM('pourcentage', 'montant','livraisonGratuite')") */
+    /** @ORM\Column(type="string", length=255) */
     private $typeReduction;
 
     public function getId(): ?int

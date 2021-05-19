@@ -74,6 +74,11 @@ abstract class Deal
      */
     protected $votes;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    protected $dateCreation;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -251,6 +256,18 @@ abstract class Deal
                 $vote->setDeal(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->dateCreation;
+    }
+
+    public function setDateCreation(\DateTimeInterface $dateCreation): self
+    {
+        $this->dateCreation = $dateCreation;
 
         return $this;
     }

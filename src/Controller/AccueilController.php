@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Form\AdvertisementType;
 use App\Form\BonPlanFormType;
+use App\Form\CodePromoFormType;
+use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,6 +46,33 @@ class AccueilController extends AbstractController
         return $this->render('bonPlanForm.html.twig', [
             'form' => $form->createView(),
         ]);
-
     }
+
+    /**
+    * @IsGranted("ROLE_USER")
+    * @Route("/addCodePromo")
+    */
+    public function addCodePromo(Request $request) :Response
+    {
+        $codePromo = new \App\Entity\CodePromo();
+
+        $form = $this->createForm(CodePromoFormType::class, $codePromo);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $codePromo = $form->getData();
+            $codePromo->setDateCreation(new \DateTime('now'));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($codePromo);
+
+            $entityManager->flush();
+            return $this->redirectToRoute('accueil');
+        }
+
+        return $this->render('CodePromoForm.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
 }

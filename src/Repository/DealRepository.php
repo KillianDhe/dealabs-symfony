@@ -47,4 +47,5 @@ class DealRepository extends ServiceEntityRepository
         ;
     }
     */
+
 }
