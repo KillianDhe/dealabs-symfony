@@ -53,4 +53,8 @@ class CodePromo extends Deal
 
         return $this;
     }
+
+    public function getType():string{
+        return "CodePromo";
+    }
 }

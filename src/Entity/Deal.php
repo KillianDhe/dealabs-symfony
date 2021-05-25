@@ -271,4 +271,6 @@ abstract class Deal
 
         return $this;
     }
+
+    public abstract function getType():string;
 }

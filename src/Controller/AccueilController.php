@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\BonPlan;
 use App\Form\AdvertisementType;
 use App\Form\BonPlanFormType;
 use App\Form\CodePromoFormType;
@@ -20,7 +21,12 @@ class AccueilController extends AbstractController
     public function displayAllDeals(): Response
     {
         $deals = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->findAll();
-        return $this->render('ALaUne.html.twig', ['deals' => $deals]);
+
+        $arrayType = array();
+        foreach ($deals as $deal){
+            array_push($arrayType, get_class($deal)) ;
+        }
+        return $this->render('ALaUne.html.twig', ['deals' => $deals, 'types' => $arrayType]);
     }
 
     /**
@@ -35,6 +41,7 @@ class AccueilController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $bonPlan = $form->getData();
+            $bonPlan->setDateCreation(new \DateTime('now'));
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($bonPlan);
@@ -61,7 +68,6 @@ class AccueilController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $codePromo = $form->getData();
-            $codePromo->setDateCreation(new \DateTime('now'));
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($codePromo);
@@ -72,6 +78,18 @@ class AccueilController extends AbstractController
 
         return $this->render('CodePromoForm.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/deal/{id}", name="app_deal_detail")
+     */
+    public function detailDeal(int $id):Response
+    {
+        $deal = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->find($id);
+
+        return $this->render('detailDeal.html.twig', [
+            'deal' => $deal
         ]);
     }
 

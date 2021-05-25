@@ -89,4 +89,8 @@ class BonPlan extends Deal
 
         return $this;
     }
+
+    public function getType():string{
+        return "BonPlan";
+    }
 }

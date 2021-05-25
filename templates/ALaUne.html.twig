@@ -5,9 +5,31 @@
         <h1>Aucun deal, tristesse</h1>
     {% endif %}
     {% for deal in deals %}
+        {% if deal is instanceof('BonPlan') %}
+        <h1>bon plan</h1>
+        {%  endif %}
+        {% if deal is instanceof('CodePromo') %}
+            <h1>bon plan</h1>
+        {%  endif %}
+        {% if deal is instanceof('Deal') %}
+            <h1>Deal</h1>
+        {%  endif %}
+
+        {%  if deal.getType == 'BonPlan' %}
+            <h1>{{ deal.prix }}€</h1>
+        {%  endif %}
         <h1>{{ deal.titre }}</h1>
         <h3>{{ deal.description }}</h3>
+        <button> <a href="{{ path('app_deal_detail', {'id': deal.id}) }}">Detail</a></button>
+
     {% endfor %}
+
+    {% for type in types %}
+        <h1>{{ type }}</h1>
+
+    {% endfor %}
+
+
 {% endblock %}
 
 {% block title %}
