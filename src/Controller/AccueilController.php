@@ -6,6 +6,7 @@ use App\Entity\BonPlan;
 use App\Form\AdvertisementType;
 use App\Form\BonPlanFormType;
 use App\Form\CodePromoFormType;
+use DateInterval;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,13 +21,15 @@ class AccueilController extends AbstractController
      */
     public function displayAllDeals(): Response
     {
-        $deals = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->findAll();
+        $OneWeekAgo = new \DateTime('now');
+        $OneWeekAgo->modify('-7 day');
+        $deals = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->findByDateCreation($OneWeekAgo);
 
         $arrayType = array();
         foreach ($deals as $deal){
             array_push($arrayType, get_class($deal)) ;
         }
-        return $this->render('ALaUne.html.twig', ['deals' => $deals, 'types' => $arrayType]);
+        return $this->render('ALaUne.html.twig', ['deals' => $deals, 'types' => $arrayType, 'date'=> $OneWeekAgo]);
     }
 
     /**
