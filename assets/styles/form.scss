@@ -1,0 +1,72 @@
+@import '~bootstrap/scss/bootstrap.scss';
+.form-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+
+.form-item > INPUT {
+  @extend .form-control;
+}
+
+.form-item__submit {
+  margin-top: 8px;
+  flex-direction: row;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.form-group > DIV[id$='form'] {
+  margin-left: 5px;
+}
+
+.form-group > DIV[id$='form'] > .form-group {
+  margin-top: 2px;
+}
+
+.form-group > DIV[id$='form'] > FIELDSET.form-group {
+  margin-top: 5px;
+}
+
+.form-group > LABEL {
+  font-weight: bold;
+  color: #757575;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.form-group > LABEL:first-letter {
+  text-transform: uppercase;
+}
+
+.form-group > LABEL > SPAN {
+  width: unset;
+  font-weight: normal;
+  flex: 1;
+  text-align: right;
+}
+
+.col-form-label {
+  font-size: 105%;
+  position: relative;
+}
+
+.col-form-label:after {
+  content: "";
+  height: 1px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  $grey: #eeeeee;
+  background: linear-gradient(to right, $grey 0%, $grey 30%, transparent 50%);
+}
+
+.form-group > .col-form-label {
+  font-size: 150%;
+}
+
+.form-group > DIV[id$='form'] > .form-group > .col-form-label {
+  font-size: 110%;
+}

@@ -15,8 +15,20 @@ body {
   display: grid;
 }
 
+.appcontent > .container {
+  padding-bottom: 30px;
+}
+
 .rightInFlex {
   margin-left: auto;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 5px;
 }
 
 /* SCROLL BAR ------------------------- */
@@ -36,7 +48,7 @@ body {
 
 /* Track on hover */
 ::-webkit-scrollbar-track:hover {
-  background-color: #eeeeee;
+  background-color: rgba(238, 238, 238, 0.5);
 }
 
 /* Handle */
