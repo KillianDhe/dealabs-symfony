@@ -4,33 +4,23 @@
     {% if deals is empty %}
         <h1>Aucun deal, tristesse</h1>
     {% endif %}
+
     {% for deal in deals %}
-        {% if deal is instanceof('BonPlan') %}
-        <h1>bon plan</h1>
-        {%  endif %}
-        {% if deal is instanceof('CodePromo') %}
-            <h1>bon plan</h1>
-        {%  endif %}
-        {% if deal is instanceof('Deal') %}
-            <h1>Deal</h1>
-        {%  endif %}
 
-        {%  if deal.getType == 'BonPlan' %}
-            <h1>{{ deal.prix }}€</h1>
+
+        <h2>Titre : {{ deal.titre }}</h2>
+        <h2>degres : {{ deal.votes.count() }}</h2>
+        {%  if deal.type == 'BonPlan' %}
+            <h1>Prix : {{ deal.prix }}€</h1>
         {%  endif %}
-        <h1>{{ deal.titre }}</h1>
-        <h3>{{ deal.description }}</h3>
-        <button> <a href="{{ path('app_deal_detail', {'id': deal.id}) }}">Detail</a></button>
+        {%  if deal.type == 'CodePromo' %}
+            <h1>Reduction : -{{ deal.montant }}</h1>
+        {%  endif %}
+        <h3>Description : {{ deal.description|slice(0,100) }}</h3>
+        <h3>{{ deal.commentaires.count()}} commentaire(s)</h3>
+        <a class="btn btn-primary" href="{{ path('app_deal_detail', {'id': deal.id}) }}">Detail</a>
 
     {% endfor %}
-
-    {% for type in types %}
-        <h1>{{ type }}</h1>
-
-    {% endfor %}
-
-    <h1>{{ date|date('d/m/y') }}</h1>
-
 
 {% endblock %}
 

@@ -4,6 +4,13 @@
     <h3>{{ deal.description }}</h3>
     <h3>{{ deal.titre }}</h3>
     <h3>{{ deal.codePromo }}</h3>
+
+<h4>Commentaires : </h4>
+{%  for comment in deal.commentaires %}
+<h4>{{ comment.contenu }}</h4>
+{% endfor %}
+
+{{ form(form) }}
 {% endblock %}
 
 {% block title %}

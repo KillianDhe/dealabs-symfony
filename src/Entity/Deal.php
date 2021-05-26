@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping\InheritanceType;
 use Doctrine\ORM\Mapping\MappedSuperclass;
 
 /**
- * @Entity
+ * @Entity(repositoryClass=DealRepository::class)
  * @InheritanceType("SINGLE_TABLE")
  * @DiscriminatorColumn(name="discr", type="string")
  * @DiscriminatorMap({"bonPlan" = "BonPlan", "codePromo" = "CodePromo"})
