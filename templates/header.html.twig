@@ -30,39 +30,40 @@
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-labeled btn-primary" type="submit"><i class="fas fa-search"></i></button>
             </form>
-        </div>
-        <div style="margin-left: 10px; display: flex; flex-direction: row; column-gap: 5px;">
+
+          <div class="header-right">
             {% if app.user %}
-                <li class="dropdown" style="list-style-type: none;">
-                    <a class="btn btn-light" id="userDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user"></i>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="right: 0; left: unset;">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                            <a class="dropdown-item logoutBtn" href="/logout">
-                                <i class="fas fa-sign-out-alt"></i>
-                                Déconnexion
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown" style="list-style-type: none;">
-                    <a class="btn btn-light" href="" id="createDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-plus"></i>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="right: 0; left: unset;">
-                        <li><a class="dropdown-item" href="{{ path('app_accueil_addbonplan') }}">Créer un Bon Plan</a></li>
-                        <li><a class="dropdown-item" href="{{ path('app_accueil_addcodepromo') }}">Créer un Code Promo</a></li>
-                    </ul>
-                </li>
-            {% else %}
-                <a class="btn btn-light" href="{{ path('app_login') }}">
-                    <i class="fas fa-sign-in-alt"></i>
-                    Connexion
+              <li class="dropdown" style="list-style-type: none;">
+                <a class="btn btn-light" id="userDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fas fa-user"></i>
                 </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="right: 0; left: unset;">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li>
+                    <a class="dropdown-item logoutBtn" href="/logout">
+                      <i class="fas fa-sign-out-alt"></i>
+                      Déconnexion
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="dropdown" style="list-style-type: none;">
+                <a class="btn btn-light" href="" id="createDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fas fa-plus"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="right: 0; left: unset;">
+                  <li><a class="dropdown-item" href="{{ path('app_accueil_addbonplan') }}">Créer un Bon Plan</a></li>
+                  <li><a class="dropdown-item" href="{{ path('app_accueil_addcodepromo') }}">Créer un Code Promo</a></li>
+                </ul>
+              </li>
+            {% else %}
+              <a class="btn btn-light" href="{{ path('app_login') }}">
+                <i class="fas fa-sign-in-alt"></i>
+                Connexion
+              </a>
             {% endif %}
+          </div>
         </div>
     </div>
 </nav>

@@ -1,0 +1,7 @@
+{% if deal is not empty %}
+  <div class="deals-item__degrees">
+    <div class="deals-item__degrees__minus"><i class="fas fa-minus"></i></div>
+    {{ deal.votes.count() }}
+    <div class="deals-item__degrees__plus"><i class="fas fa-plus"></i></div>
+  </div>
+{% endif %}

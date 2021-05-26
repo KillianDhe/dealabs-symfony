@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="deals-item">
+    <div class="deals-item__picture" style="width: 0;">
+
+    </div>
+    <div>
+      {% include('entity/deal/deal_degrees.html.twig') %}
+      <div class="deals-item__title">{{ deal.titre }}</div>
+      <div>{% include('entity/deal/deal_price.html.twig') %}</div>
+      <a class="deals-item__link btn btn-primary" href="{{ deal.lienDuDeal }}"><i class="fas fa-external-link-alt"></i></a>
+      {% if deal.codePromo is not empty %}
+        <div class="deals-item__promoCode">{{ deal.codePromo }}</div>
+      {% endif %}
+    </div>
+    <div class="deals-item__description" style="grid-column: 1/-1;">{{ deal.description }}</div>
+  </div>
+
+
+  {% set commentaires = deal.commentaires %}
+  {% set comment_form = form %}
+  {% include('entity/comment/comment_layout.html.twig') %}
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

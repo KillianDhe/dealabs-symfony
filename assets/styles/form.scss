@@ -19,6 +19,7 @@
   flex-direction: row;
   gap: 5px;
   flex-wrap: wrap;
+  width: max-content;
 }
 
 .form-group > DIV[id$='form'] {
@@ -66,6 +67,13 @@
   right: 0;
   $grey: #eeeeee;
   background: linear-gradient(to right, $grey 0%, $grey 30%, transparent 50%);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
 }
 
 .form-group > .col-form-label {

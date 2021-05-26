@@ -11,6 +11,7 @@ import './styles/header.scss';
 import './styles/footer.scss';
 import './styles/form.scss';
 import './styles/deals.scss';
+import './styles/comment.scss';
 
 require('@fortawesome/fontawesome-free/css/all.min.css');
 require('@fortawesome/fontawesome-free/js/all.js');

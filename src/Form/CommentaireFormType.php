@@ -13,8 +13,8 @@ class CommentaireFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('contenu')
-            ->add('commenter', SubmitType::class)
+            ->add('contenu',null, array('label' => false))
+            ->add('commenter', SubmitType::class, array('attr' => array('class' => 'btn-primary flex-center form-item__submit')))
         ;
     }
 

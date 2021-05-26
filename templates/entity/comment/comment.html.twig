@@ -1,0 +1,25 @@
+{% if comment is not empty %}
+  <div class="comment-container">
+    <div class="comment-author__picture">
+
+    </div>
+    <div class="comment">
+      <div class="comment-header">
+        <div class="comment-header__author">
+          {{ comment.auteur.email }}
+        </div>
+        <div class="comment-header__date">
+          {{ date(date("now")).diff(comment.dateHeure)|date("il y a %aj %hh et%imin") }}
+        </div>
+      </div>
+      <div class="comment-content">
+        {{ comment.contenu }}
+      </div>
+      <div class="comment-actions">
+        <div>
+          <i class="fas fa-thumbs-up"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

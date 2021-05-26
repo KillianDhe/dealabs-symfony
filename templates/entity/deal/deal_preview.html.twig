@@ -1,5 +1,5 @@
 {% if deal is not empty %}
-    <div class="deals-item">
+    <div class="deals-item deals-item__shadow">
         {#
         {% if deal.image is not empty %}
         <div>
@@ -8,18 +8,9 @@
         {% endif %}
         #}
         <div class="deals-item__header">
-            <a class="deals-item__title" href="{{ path('app_deal_detail', {'id': deal.id}) }}">Titre : {{ deal.titre }}</a>
-            <div class="deals-item__degrees">
-                <div class="deals-item__degrees__minus"><i class="fas fa-minus"></i></div>
-                {{ deal.votes.count() }}
-                <div class="deals-item__degrees__plus"><i class="fas fa-plus"></i></div>
-            </div>
-            {%  if deal.type == 'BonPlan' %}
-                <div class="deals-item__price"><div>{{ deal.prix }}€</div><div class="deals-item__price__default">{{ deal.prixHabituel }}€</div></div>
-            {%  endif %}
-            {%  if deal.type == 'CodePromo' %}
-                <div class="deals-item__reduc">-{{ deal.montant }}€</div>
-            {%  endif %}
+            <a class="deals-item__title" href="{{ path('app_deal_detail', {'id': deal.id}) }}">{{ deal.titre }}</a>
+            {% include('entity/deal/deal_degrees.html.twig') %}
+            {% include('entity/deal/deal_price.html.twig') %}
             <div class="deals-item__description">{{ deal.description|slice(0,100) }}
                 {% if deal.description|length > 100 %}
                     ... <a class="deals-item__description__more" href="{{ path('app_deal_detail', {'id': deal.id}) }}">Afficher plus</a>
