@@ -1,4 +1,9 @@
 @import '~bootstrap/scss/bootstrap.scss';
+.container > FORM {
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+}
 .form-container {
   display: flex;
   flex-direction: column;

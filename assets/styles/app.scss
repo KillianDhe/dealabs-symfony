@@ -1,4 +1,4 @@
-$body-background--color: #fafafa;
+$body-background--color: #e9eaed;
 body {
   background-color: $body-background--color;
   display: flex;
@@ -13,6 +13,7 @@ body {
   overflow: auto;
   overflow: overlay;
   display: grid;
+  background-color: $body-background--color;
 }
 
 .appcontent > .container {
