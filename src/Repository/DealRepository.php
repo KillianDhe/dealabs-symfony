@@ -53,9 +53,13 @@ class DealRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('d')
         ->andWhere('d.dateCreation > :dateAgo')
         ->setParameter('dateAgo', $dateAgo)
+        ->select('COUNT(c) AS HIDDEN nbComm', 'd')
+        ->leftJoin('d.commentaires', 'c')
+        ->orderBy('nbComm', 'DESC')
+        ->groupBy('d')
         ->getQuery()
         ->getResult()
-        ;
+    ;
     }
 
 }

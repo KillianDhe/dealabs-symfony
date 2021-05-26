@@ -47,4 +47,9 @@ class CodePromoRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getHot()
+    {
+
+    }
 }

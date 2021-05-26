@@ -47,4 +47,9 @@ class BonPlanRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getHot()
+    {
+
+    }
 }
