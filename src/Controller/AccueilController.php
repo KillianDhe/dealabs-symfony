@@ -38,7 +38,7 @@ class AccueilController extends AbstractController
         $vote = new Vote();
         $vote->setUtilisateur($this->getUser());
         $vote->setDeal($deal);
-        $vote->setValeur(1);
+        $vote->setValeur(100);
         $deal->addVote($vote);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($vote);
@@ -78,12 +78,13 @@ class AccueilController extends AbstractController
         return $this->render('deals.html.twig', ['deals' => $deals,'date'=> $oneWeekAgo]);
     }
 
+
     /**
      * @Route("/hotBonPlans", name="hotBonPlans")
      */
     public function hotBonPlans(): Response
     {
-        $bonPlans = $this->entityManager->getRepository(BonPlan::class)->findAll();
+        $bonPlans = $this->entityManager->getRepository(BonPlan::class)->getHot();
         return $this->render('deals.html.twig', ['deals' => $bonPlans]);
     }
 

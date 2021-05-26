@@ -51,10 +51,10 @@ class CodePromoRepository extends ServiceEntityRepository
     public function getHot()
     {
         return $this->createQueryBuilder('c')
-            ->where('somme > 100')
-            ->addSelect('SUM(v.valeur) AS HIDDEN somme','c')
+            ->addSelect('SUM(v.valeur) AS HIDDEN somme')
             ->leftJoin('c.votes', 'v')
-            ->orderBy('somme',  'DESC')
+            ->having('somme > = 100')
+            ->orderBy('c.dateCreation',  'DESC')
             ->groupBy('c')
             ->getQuery()
             ->getResult()

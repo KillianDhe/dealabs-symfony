@@ -50,6 +50,14 @@ class BonPlanRepository extends ServiceEntityRepository
 
     public function getHot()
     {
-
+        return $this->createQueryBuilder('b')
+            ->addSelect('SUM(v.valeur) AS HIDDEN somme')
+            ->leftJoin('b.votes', 'v')
+            ->having('somme >= 100')
+            ->orderBy('b.dateCreation',  'DESC')
+            ->groupBy('b')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 }
