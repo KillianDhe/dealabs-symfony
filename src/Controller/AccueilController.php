@@ -39,7 +39,7 @@ class AccueilController extends AbstractController
         $vote = new Vote();
         $vote->setUtilisateur($this->getUser());
         $vote->setDeal($deal);
-        $vote->setValeur(100);
+        $vote->setValeur(1);
         $deal->addVote($vote);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($vote);
