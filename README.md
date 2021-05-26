@@ -1,6 +1,6 @@
 Pour travailler sur ce projet, nous avons utililser votre configuration docker.
 
-Vous pouvez ainsi build l'image en tapant `docker-compose build` à la racine du projet.
+Vous pouvez ainsi build l'image en tapant `docker-compose up --build` à la racine du projet.
 
 Cela créera les différents containers nécessaires, vous pouvez y accéder avec les liens ci-dessous.
 
