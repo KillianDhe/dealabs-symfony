@@ -30,6 +30,7 @@ class AccueilController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/voterPlus/{id}", name="app_deal_voterPlus")
      */
     public function voterPlus(int $id): Response
@@ -49,6 +50,7 @@ class AccueilController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/voterMoins/{id}", name="app_deal_voterMoins")
      */
     public function voterMoins(int $id): Response
