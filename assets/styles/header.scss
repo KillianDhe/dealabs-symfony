@@ -9,3 +9,12 @@
 .logo-dealabs svg {
   height: 100%;
 }
+
+#userDropdownMenuLink ~ .dropdown-menu {
+  padding-bottom: 0;
+}
+#userDropdownMenuLink ~ .dropdown-menu .logoutBtn {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 1px solid #e0e0e0;
+}
