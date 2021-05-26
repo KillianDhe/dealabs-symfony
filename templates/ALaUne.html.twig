@@ -5,22 +5,11 @@
         <h1>Aucun deal, tristesse</h1>
     {% endif %}
 
-    {% for deal in deals %}
-
-
-        <h2>Titre : {{ deal.titre }}</h2>
-        <h2>degres : {{ deal.votes.count() }}</h2>
-        {%  if deal.type == 'BonPlan' %}
-            <h1>Prix : {{ deal.prix }}€</h1>
-        {%  endif %}
-        {%  if deal.type == 'CodePromo' %}
-            <h1>Reduction : -{{ deal.montant }}</h1>
-        {%  endif %}
-        <h3>Description : {{ deal.description|slice(0,100) }}</h3>
-        <h3>{{ deal.commentaires.count()}} commentaire(s)</h3>
-        <a class="btn btn-primary" href="{{ path('app_deal_detail', {'id': deal.id}) }}">Detail</a>
-
-    {% endfor %}
+    <div class="deals-container">
+        {% for deal in deals %}
+            {% include('deal.html.twig') %}
+        {% endfor %}
+    </div>
 
 {% endblock %}
 
