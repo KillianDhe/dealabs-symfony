@@ -48,15 +48,14 @@ class DealRepository extends ServiceEntityRepository
     }
     */
 
-    public function findByDateCreation($dateAgo)
+    public function getALaUne($dateAgo)
     {
         return $this->createQueryBuilder('d')
-            ->andWhere('d.dateCreation > :dateAgo')
-            ->setParameter('dateAgo', $dateAgo)
-            ->orderBy(' count(d.commentaires)','DESC')
-            ->getQuery()
-            ->getResult()
-            ;
+        ->andWhere('d.dateCreation > :dateAgo')
+        ->setParameter('dateAgo', $dateAgo)
+        ->getQuery()
+        ->getResult()
+        ;
     }
 
 }

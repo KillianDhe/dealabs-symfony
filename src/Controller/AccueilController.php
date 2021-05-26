@@ -3,11 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\BonPlan;
+use App\Entity\CodePromo;
+use App\Entity\Commentaire;
+use App\Entity\Deal;
 use App\Form\AdvertisementType;
 use App\Form\BonPlanFormType;
 use App\Form\CodePromoFormType;
+use App\Form\CommentaireFormType;
 use DateInterval;
 use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,20 +21,40 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AccueilController extends AbstractController
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Route("/accueil", name="accueil")
      */
     public function displayAllDeals(): Response
     {
-        $OneWeekAgo = new \DateTime('now');
-        $OneWeekAgo->modify('-7 day');
-        $deals = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->findByDateCreation($OneWeekAgo);
+        $oneWeekAgo = new \DateTime();
+        $oneWeekAgo->modify('-7 days');
+        $deals = $this->entityManager->getRepository(Deal::class)->getALaUne($oneWeekAgo);
+        return $this->render('ALaUne.html.twig', ['deals' => $deals,'date'=> $oneWeekAgo]);
+    }
 
-        $arrayType = array();
-        foreach ($deals as $deal){
-            array_push($arrayType, get_class($deal)) ;
-        }
-        return $this->render('ALaUne.html.twig', ['deals' => $deals, 'types' => $arrayType, 'date'=> $OneWeekAgo]);
+    /**
+     * @Route("/hotBonPlans", name="hotBonPlans")
+     */
+    public function hotBonPlans(): Response
+    {
+        $bonPlans = $this->entityManager->getRepository(BonPlan::class)->getHot();
+        return $this->render('HotBonPlans.html.twig', ['bonPlans' => $bonPlans]);
+    }
+
+    /**
+     * @Route("/hotCodePromos", name="hotCodePromos")
+     */
+    public function hotCodePromos(): Response
+    {
+        $codePromos = $this->entityManager->getRepository(CodePromo::class)->getHot();
+        return $this->render('HotCodePromos.html.twig', ['codePromos' => $codePromos]);
     }
 
     /**
@@ -71,6 +96,7 @@ class AccueilController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $codePromo = $form->getData();
+            $codePromo->setDateCreation(new \DateTime('now'));
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($codePromo);
@@ -87,12 +113,30 @@ class AccueilController extends AbstractController
     /**
      * @Route("/deal/{id}", name="app_deal_detail")
      */
-    public function detailDeal(int $id):Response
+    public function detailDeal(int $id,Request $request):Response
     {
         $deal = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->find($id);
+        $commentaire = new \App\Entity\Commentaire();
+
+        $commentaireForm = $this->createForm(CommentaireFormType    ::class, $commentaire);
+
+        $commentaireForm->handleRequest($request);
+        if ($commentaireForm->isSubmitted() && $commentaireForm->isValid()) {
+            $commentaire = $commentaireForm->getData();
+            $commentaire->setDateHeure(new DateTime());
+            $commentaire->setAuteur($this->getUser());
+            $commentaire->setDeal($deal);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($commentaire);
+
+            $entityManager->flush();
+            return $this->redirectToRoute('app_deal_detail', ['id' => $id]);
+        }
 
         return $this->render('detailDeal.html.twig', [
-            'deal' => $deal
+            'deal' => $deal,
+            'form' => $commentaireForm->createView(),
         ]);
     }
 
