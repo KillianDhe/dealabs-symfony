@@ -15,7 +15,7 @@ Pour entrer dans le container apache afin d'y executer la commande:
 `cd /var/www/lpa_sf4`
 `composer install`
 
-Afin de build tout ce qui est js, css (les assets), vous devez tapez la commande `yarn encore dev` (yarn n'est pas intallé dans le container, vous pouvez sur votre machine).
+Afin de build tout ce qui est js, css (les assets), vous devez tapez la commande `yarn install` puis `yarn encore dev` (yarn n'est pas intallé dans le container, vous pouvez sur votre machine).
 
 A ce stade, la seule chose qui devrait vous manquer est la base de données.
 Nous n'avons pas (encore) crée de fixture, vous pouvez donc soit:
