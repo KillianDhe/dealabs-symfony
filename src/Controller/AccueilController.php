@@ -176,7 +176,7 @@ class AccueilController extends AbstractController
             return $this->redirectToRoute('app_deal_detail', ['id' => $id]);
         }
 
-        return $this->render('detailDeal.html.twig', [
+        return $this->render('entity/deal/deal.html.twig', [
             'deal' => $deal,
             'form' => $commentaireForm->createView(),
         ]);

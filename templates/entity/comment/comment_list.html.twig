@@ -1,0 +1,13 @@
+{% if commentaires is not empty %}
+  <div class="comment-list-container">
+    <div class="comment-list-header">
+      <i class="fas fa-comment" style="transform: rotateY(180deg);"></i>
+      <div>{{ commentaires|length }} Commentaires</div>
+    </div>
+    <div class="comment-list">
+      {% for comment in commentaires %}
+        {% include('entity/comment/comment.html.twig') %}
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

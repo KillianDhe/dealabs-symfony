@@ -11,12 +11,14 @@
   display: flex;
   flex-direction: column;
   row-gap: 5px;
+  text-align: justify;
 }
 
 .footerDealabs--title {
   font-weight: bold;
   font-size: 110%;
   color: whitesmoke;
+  text-align: start;
 }
 
 .footerDealabs--icon {
@@ -35,4 +37,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  @media (max-width: 575px) {
+    flex-direction: column;
+  }
 }

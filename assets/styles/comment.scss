@@ -1,0 +1,76 @@
+.comment-container {
+  padding: 20px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.comment-header {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  font-size: 95%;
+
+  .comment-header__author {
+    font-weight: bold;
+  }
+
+  .comment-header__date {
+    color: #616161;
+  }
+}
+
+.comment-content {
+
+}
+
+.comment-actions > DIV {
+  cursor: pointer;
+  width: max-content;
+}
+
+.comment-list-container {
+ .comment-list-header {
+   background-color: #212121;
+   color: white;
+   padding: 10px 30px;
+   display: flex;
+   flex-direction: row;
+   column-gap: 8px;
+   align-items: center;
+ }
+}
+
+.comment-list > DIV:not(:last-child) {
+  border-bottom: 1px solid black;
+}
+.comment-layout-container {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.comment-write-container {
+  padding: 10px;
+}
+
+.comment-write-login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 5px;
+  padding: 20px;
+}
+.comment-write-login__desc {
+  text-align: center;
+  font-weight: bold;
+}
+.comment-write-login__btn {
+  width: max-content;
+  align-self: center;
+
+}

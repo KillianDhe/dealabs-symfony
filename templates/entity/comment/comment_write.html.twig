@@ -1,0 +1,14 @@
+{% if comment_form is not empty %}
+  {% if app.user %}
+    <div class="comment-write-container">
+      {{ form(comment_form) }}
+    </div>
+  {% else %}
+    <div class="comment-write-login-container">
+      <div class="comment-write-login__desc">
+        Il faut être connecté pour mettre un commentaire
+      </div>
+      <a href="{{ path('app_login') }}" class="btn btn-primary comment-write-login__btn"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+    </div>
+  {% endif %}
+{% endif %}
