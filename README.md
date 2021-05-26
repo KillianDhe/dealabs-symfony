@@ -21,5 +21,5 @@ A ce stade, la seule chose qui devrait vous manquer est la base de données.
 Nous n'avons pas (encore) crée de fixture, vous pouvez donc soit:
  -  repartir d'une base neuve et sans données en tapant la commande `bin/console doctrine:migrations:migrate` dans le container apache.
  
- -  utililser ma base de données que je vous joins en copie (le dossier db), qui est à copier/coller dans le dossier .docker/data  celle-ci contient déjà quelques données et vous évitera de les créer à la main.
+ -  utililser ma base de données que je vous joins en copie (le dossier db), qui est à copier/coller dans le dossier .docker/data  celle-ci contient déjà quelques données et vous évitera de les créer à la main. (finalement j'ai pas réussi, désolé)
 
