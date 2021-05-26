@@ -10,9 +10,10 @@
         <div class="deals-item__header">
             <a class="deals-item__title" href="{{ path('app_deal_detail', {'id': deal.id}) }}">Titre : {{ deal.titre }}</a>
             <div class="deals-item__degrees">
-                <div class="deals-item__degrees__minus"><i class="fas fa-minus"></i></div>
-                {{ deal.votes.count() }}
-                <div class="deals-item__degrees__plus"><i class="fas fa-plus"></i></div>
+                <a class="deals-item__degrees__minus" href="{{ path('app_deal_voterPlus', {'id': deal.id}) }}"><i class="fas fa-minus"></i></a>
+
+                {{ deal.getDegres()|trans }}
+                <a class="deals-item__degrees__plus" href="{{ path('app_deal_voterPlus', {'id': deal.id}) }}"><i class="fas fa-plus"></i></a>
             </div>
             {%  if deal.type == 'BonPlan' %}
                 <div class="deals-item__price"><div>{{ deal.prix }}€</div><div class="deals-item__price__default">{{ deal.prixHabituel }}€</div></div>

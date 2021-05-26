@@ -265,6 +265,16 @@ abstract class Deal
         return $this->dateCreation;
     }
 
+    public function getDegres(): int
+    {
+        $degres = 0;
+        foreach($this->getVotes() as $vote ){
+            $degres+= $vote->getValeur();
+         }
+        return $degres;
+    }
+
+
     public function setDateCreation(\DateTimeInterface $dateCreation): self
     {
         $this->dateCreation = $dateCreation;

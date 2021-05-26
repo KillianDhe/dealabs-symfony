@@ -6,6 +6,7 @@ use App\Entity\BonPlan;
 use App\Entity\CodePromo;
 use App\Entity\Commentaire;
 use App\Entity\Deal;
+use App\Entity\Vote;
 use App\Form\AdvertisementType;
 use App\Form\BonPlanFormType;
 use App\Form\CodePromoFormType;
@@ -26,6 +27,44 @@ class AccueilController extends AbstractController
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
+    }
+
+    /**
+     * @Route("/voterPlus/{id}", name="app_deal_voterPlus")
+     */
+    public function voterPlus(int $id): Response
+    {
+        $deal = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->find($id);
+        $vote = new Vote();
+        $vote->setUtilisateur($this->getUser());
+        $vote->setDeal($deal);
+        $vote->setValeur(1);
+        $deal->addVote($vote);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($vote);
+
+        $entityManager->flush();
+        return $this->redirectToRoute('app_deal_detail', ['id' => $id]);
+
+    }
+
+    /**
+     * @Route("/voterMoins/{id}", name="app_deal_voterMoins")
+     */
+    public function voterMoins(int $id): Response
+    {
+        $deal = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->find($id);
+        $vote = new Vote();
+        $vote->setUtilisateur($this->getUser());
+        $vote->setDeal($deal);
+        $vote->setValeur(-1);
+        $deal->addVote($vote);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($vote);
+
+        $entityManager->flush();
+        return $this->redirectToRoute('app_deal_detail', ['id' => $id]);
+
     }
 
     /**
@@ -53,7 +92,7 @@ class AccueilController extends AbstractController
      */
     public function hotCodePromos(): Response
     {
-        $codePromos = $this->entityManager->getRepository(CodePromo::class)->findAll();
+        $codePromos = $this->entityManager->getRepository(CodePromo::class)->getHot();
         return $this->render('deals.html.twig', ['deals' => $codePromos]);
     }
 

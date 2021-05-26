@@ -20,7 +20,7 @@ class Vote
     /**
      * @ORM\Column(type="integer")
      */
-    private $Valeur;
+    private $valeur;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="votes")
@@ -41,12 +41,12 @@ class Vote
 
     public function getValeur(): ?int
     {
-        return $this->Valeur;
+        return $this->valeur;
     }
 
-    public function setValeur(int $Valeur): self
+    public function setValeur(int $valeur): self
     {
-        $this->Valeur = $Valeur;
+        $this->valeur = $valeur;
 
         return $this;
     }
