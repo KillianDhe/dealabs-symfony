@@ -1,0 +1,25 @@
+{% if deal is not empty %}
+    <a class="deals-item" href="{{ path('app_deal_detail', {'id': deal.id}) }}">
+        {#
+        {% if deal.image is not empty %}
+        #}
+        <div>
+
+        </div>
+        {#
+        {% endif %}
+        #}
+        <div class="deals-item__header-side">
+          <span class="deals-item__degrees-side">
+            {{ deal.degres()|trans }}°
+          </span>
+          <span class="deals-item__title">{{ deal.titre }}</span>
+          <div class="deals-item__description">{{ deal.description|slice(0,50) }}
+              {% if deal.description|length > 50 %}
+                ...
+              {% endif %}
+          </div>
+          {% include('entity/deal/deal_price.html.twig') %}
+        </div>
+    </a>
+{% endif %}

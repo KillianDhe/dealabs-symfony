@@ -17,7 +17,7 @@
                 {% if deal.description|length > 100 %}
                     ... <a class="deals-item__description__more" href="{{ path('app_deal_detail', {'id': deal.id}) }}">Afficher plus</a>
                 {% endif %}</div>
-            <div class="deals-item__comments-count"><i class="fas fa-comment deals-item__comments-count__icon" style="transform: rotateY(180deg);"></i>{{ deal.commentaires.count()}}</div>
+            <a class="deals-item__comments-count" href="{{ path('app_deal_detail', {'id': deal.id}) }}#comments"><i class="fas fa-comment deals-item__comments-count__icon" style="transform: rotateY(180deg);"></i>{{ deal.commentaires.count()}}</a>
             <div class="deals-item__link">
                 <a class="btn btn-primary" href="{{ path('app_deal_detail', {'id': deal.id}) }}">Detail</a>
             </div>
