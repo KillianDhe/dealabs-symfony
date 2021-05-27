@@ -4,11 +4,24 @@
     {% if deals is empty %}
         <h1>Aucun deal, tristesse</h1>
     {% endif %}
-
-    <div class="deals-container">
-        {% for deal in deals %}
-            {% include('entity/deal/deal_preview.html.twig') %}
-        {% endfor %}
+    <div class="deals-layout">
+      <div class="deals-container">
+          {% for deal in deals %}
+              {% include('entity/deal/deal_preview.html.twig') %}
+          {% endfor %}
+      </div>
+      {% if dealsJourHot is defined and dealsJourHot|length >= 0 %}
+        <div class="deals-layout-side deals-item__shadow">
+          <div class="deals-layout-side__title">
+            Les deals les plus Hot <i class="fas fa-fire" style="color: #ef5350; font-size: 130%"></i>
+          </div>
+          <div class="deals-layout-side__items-container">
+            {% for deal in dealsJourHot %}
+              {% include('entity/deal/deal_preview_side.html.twig') %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
     </div>
 
 {% endblock %}
