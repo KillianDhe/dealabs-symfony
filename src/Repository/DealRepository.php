@@ -62,4 +62,19 @@ class DealRepository extends ServiceEntityRepository
     ;
     }
 
+    public function getDealsHotJour()
+    {
+        $dateAgo = new \DateTime('-1 day');
+
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.dateCreation > :dateAgo')
+            ->setParameter('dateAgo', $dateAgo)
+            ->addSelect('SUM(v.valeur) AS HIDDEN somme')
+            ->leftJoin('c.votes', 'v')
+            ->orderBy('somme',  'DESC')
+            ->groupBy('c')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

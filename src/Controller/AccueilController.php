@@ -36,13 +36,21 @@ class AccueilController extends AbstractController
     public function voterPlus(int $id): Response
     {
         $deal = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->find($id);
-        $vote = new Vote();
-        $vote->setUtilisateur($this->getUser());
-        $vote->setDeal($deal);
-        $vote->setValeur(1);
-        $deal->addVote($vote);
+        $voteUser = $this->getDoctrine()->getRepository(\App\Entity\Vote::class)->findOneBy(["Utilisateur" => $this->getUser(), "deal" => $deal ]);
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($vote);
+
+        if($voteUser != null){
+            $voteUser->setValeur(1);
+            $entityManager->persist($voteUser);
+        }
+        else{
+            $vote = new Vote();
+            $vote->setUtilisateur($this->getUser());
+            $vote->setDeal($deal);
+            $vote->setValeur(1);
+            $deal->addVote($vote);
+            $entityManager->persist($vote);
+        }
 
         $entityManager->flush();
         return $this->redirectToRoute('app_deal_detail', ['id' => $id]);
@@ -56,17 +64,24 @@ class AccueilController extends AbstractController
     public function voterMoins(int $id): Response
     {
         $deal = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->find($id);
-        $vote = new Vote();
-        $vote->setUtilisateur($this->getUser());
-        $vote->setDeal($deal);
-        $vote->setValeur(-1);
-        $deal->addVote($vote);
+        $voteUser = $this->getDoctrine()->getRepository(\App\Entity\Vote::class)->findOneBy(["Utilisateur" => $this->getUser(), "deal" => $deal ]);
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($vote);
+
+        if($voteUser != null){
+            $voteUser->setValeur(-1);
+            $entityManager->persist($voteUser);
+        }
+        else{
+            $vote = new Vote();
+            $vote->setUtilisateur($this->getUser());
+            $vote->setDeal($deal);
+            $vote->setValeur(-1);
+            $deal->addVote($vote);
+            $entityManager->persist($vote);
+        }
 
         $entityManager->flush();
         return $this->redirectToRoute('app_deal_detail', ['id' => $id]);
-
     }
 
     /**
@@ -77,7 +92,9 @@ class AccueilController extends AbstractController
         $oneWeekAgo = new \DateTime();
         $oneWeekAgo->modify('-7 days');
         $deals = $this->entityManager->getRepository(Deal::class)->getALaUne($oneWeekAgo);
-        return $this->render('deals.html.twig', ['deals' => $deals,'date'=> $oneWeekAgo]);
+
+        $dealsHotJour = $this->entityManager->getRepository(Deal::class)->getALaUne($oneWeekAgo);
+        return $this->render('deals.html.twig', ['deals' => $deals,'dealsJourHot'=> $dealsHotJour]);
     }
 
 
