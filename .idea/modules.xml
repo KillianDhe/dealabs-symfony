@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/dealabs.iml" filepath="$PROJECT_DIR$/.idea/dealabs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../Security/tp3/project/docker-sf4/.idea/docker-sf4.iml" filepath="$PROJECT_DIR$/../../Security/tp3/project/docker-sf4/.idea/docker-sf4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../Security/tp3/project/security_project/.idea/security_project.iml" filepath="$PROJECT_DIR$/../../Security/tp3/project/security_project/.idea/security_project.iml" />
     </modules>
   </component>
 </project>

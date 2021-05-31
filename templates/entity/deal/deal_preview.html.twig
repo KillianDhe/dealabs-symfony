@@ -3,8 +3,8 @@
         {#
         {% if deal.image is not empty %}
         #}
-        <div>
-
+        <div class="deals-item__picture">
+          <img src="{{ vich_uploader_asset(deal, 'imageFile') }}">
         </div>
         {#
         {% endif %}
