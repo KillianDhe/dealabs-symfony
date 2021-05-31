@@ -14,7 +14,7 @@ Pour entrer dans le container apache afin d'y executer la commande:
 - `docker exec -it -u root lpa_sf4_php bash`
 - `cd /var/www/lpa_sf4`
 - `composer install`
-- `chown -R www-data:www-data public`
+- `chown -R www-data:www-data public/uploads`
 
 Afin de build tout ce qui est js, css (les assets), vous devez tapez la commande `yarn install` puis `yarn encore dev` (yarn n'est pas intallé dans le container, vous pouvez sur votre machine).
 
