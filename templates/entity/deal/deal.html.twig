@@ -2,8 +2,8 @@
 
 {% block body %}
   <div class="deals-item">
-    <div class="deals-item__picture" style="width: 0;">
-
+    <div class="deals-item__picture">
+      <img src="{{ vich_uploader_asset(deal, 'imageFile') }}">
     </div>
     <div>
       {% include('entity/deal/deal_degrees.html.twig') %}

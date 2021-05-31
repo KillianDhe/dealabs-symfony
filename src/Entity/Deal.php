@@ -11,12 +11,15 @@ use Doctrine\ORM\Mapping\DiscriminatorMap;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\InheritanceType;
 use Doctrine\ORM\Mapping\MappedSuperclass;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @Entity(repositoryClass=DealRepository::class)
  * @InheritanceType("SINGLE_TABLE")
  * @DiscriminatorColumn(name="discr", type="string")
  * @DiscriminatorMap({"bonPlan" = "BonPlan", "codePromo" = "CodePromo"})
+ * @Vich\Uploadable
  */
 
 abstract class Deal
@@ -78,6 +81,18 @@ abstract class Deal
      * @ORM\Column(type="date")
      */
     protected $dateCreation;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="deals_images", fileNameProperty="image")
+     * @var File
+     */
+    private $imageFile;
 
     public function __construct()
     {
@@ -283,4 +298,35 @@ abstract class Deal
     }
 
     public abstract function getType():string;
+
+    public function setImageFile(File $image = null)
+    {
+      $this->imageFile = $image;
+
+      // VERY IMPORTANT:
+      // It is required that at least one field changes if you are using Doctrine,
+      // otherwise the event listeners won't be called and the file is lost
+      if ($image) {
+        // if 'updatedAt' is not defined in your entity, use another property
+        $this->updatedAt = new \DateTime('now');
+      }
+    }
+
+    public function getImageFile()
+    {
+      return $this->imageFile;
+    }
+
+    public function setImage($image)
+    {
+      $this->image = $image;
+    }
+
+    public function getImage()
+    {
+      if (empty($this->image)) {
+        return 'default.svg';
+      }
+      return $this->image;
+    }
 }
