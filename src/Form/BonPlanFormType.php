@@ -10,6 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class BonPlanFormType extends AbstractType
 {
@@ -25,6 +26,7 @@ class BonPlanFormType extends AbstractType
             ->add('PrixHabituel')
             ->add('FraisDePort')
             ->add('isLivraisonGratuite')
+            ->add('imageFile', VichImageType::class)
             ->add('groupes', EntityType::class, [
                 'class' => Groupe::class,
                 'choice_label' => 'nom',
