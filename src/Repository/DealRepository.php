@@ -70,9 +70,9 @@ class DealRepository extends ServiceEntityRepository
             ->andWhere('d.dateCreation > :dateAgo')
             ->setParameter('dateAgo', $dateAgo)
             ->addSelect('SUM(v.valeur) AS HIDDEN somme')
-            ->leftJoin('c.votes', 'v')
+            ->leftJoin('d.votes', 'v')
             ->orderBy('somme',  'DESC')
-            ->groupBy('c')
+            ->groupBy('d')
             ->getQuery()
             ->getResult()
             ;

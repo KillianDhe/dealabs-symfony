@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+
+{% for groupe in groupes %}
+
+    <h3>{{ groupe.nom }}</h3>
+
+{% endfor %}
+
+{% endblock %}
+
