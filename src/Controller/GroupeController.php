@@ -30,4 +30,14 @@ class GroupeController extends AbstractController
             'groupes' => $groupes,
         ]);
     }
+
+    /**
+     * @Route("/displayDealsByGroupe/{dealId}", name="app_groupe_displayDealsByGroupe")
+     */
+    public function displayDealsByGroupe($dealId): Response
+    {
+        $deals = $this->entityManager->getRepository(Deal::class)->getDealsByGroupeId($dealId);
+        return $this->render('deals.html.twig', ['deals' => $deals]);
+    }
+
 }

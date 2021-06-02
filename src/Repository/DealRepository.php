@@ -77,4 +77,20 @@ class DealRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+    public function getDealsByGroupeId($groupeId)
+    {
+
+        return $this->createQueryBuilder('d')
+            ->leftJoin('d.votes', 'v')
+            ->addSelect('SUM(v.valeur) AS HIDDEN somme')
+            ->andWhere('g.id = :groupeId')
+            ->setParameter('groupeId',$groupeId)
+            ->leftJoin('d.groupes', 'g')
+            ->orderBy('somme',  'DESC')
+            ->groupBy('d')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }
