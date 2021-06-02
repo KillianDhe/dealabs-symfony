@@ -37,7 +37,9 @@ class AccueilController extends AbstractController
         $oneWeekAgo = new \DateTime();
         $oneWeekAgo->modify('-7 days');
         $deals = $this->entityManager->getRepository(Deal::class)->getALaUne($oneWeekAgo);
-        return $this->render('deals.html.twig', ['deals' => $deals,'date'=> $oneWeekAgo]);
+
+        $dealsHotJour = $this->entityManager->getRepository(Deal::class)->getDealsHotJour();
+        return $this->render('deals.html.twig', ['deals' => $deals,'dealsJourHot'=> $dealsHotJour]);
     }
 
 

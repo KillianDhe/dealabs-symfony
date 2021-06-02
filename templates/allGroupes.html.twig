@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+
+{% for groupe in groupes %}
+
+    <a  href="{{ path('app_groupe_displayDealsByGroupe', {'dealId': groupe.id}) }}">{{ groupe.nom }}</a>
+
+{% endfor %}
+
+{% endblock %}
+

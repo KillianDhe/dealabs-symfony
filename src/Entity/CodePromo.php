@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CodePromoRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,9 +48,19 @@ class CodePromo extends Deal
         return $this->typeReduction;
     }
 
+    /**
+     * @throws Exception
+     */
     public function setTypeReduction(?string $typeReduction): self
     {
-        $this->typeReduction = $typeReduction;
+        $typesAutorises = array('pourcentage','euros','livraison gratuite');
+
+        if(in_array($typeReduction,$typesAutorises)){
+            $this->typeReduction = $typeReduction;
+        }
+        else{
+            throw new Exception("Le type de récution doit etre un pourcentage, des euros ou livraison gratuite");
+        }
 
         return $this;
     }
