@@ -54,10 +54,16 @@ class User implements UserInterface
      */
     private $commentaires;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Deal::class, inversedBy="usersSaved")
+     */
+    private $dealsSaved;
+
     public function __construct()
     {
         $this->votes = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        $this->dealsSaved = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -209,6 +215,30 @@ class User implements UserInterface
                 $commentaire->setAuteur(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Deal[]
+     */
+    public function getDealsSaved(): Collection
+    {
+        return $this->dealsSaved;
+    }
+
+    public function addDealsSaved(Deal $dealsSaved): self
+    {
+        if (!$this->dealsSaved->contains($dealsSaved)) {
+            $this->dealsSaved[] = $dealsSaved;
+        }
+
+        return $this;
+    }
+
+    public function removeDealsSaved(Deal $dealsSaved): self
+    {
+        $this->dealsSaved->removeElement($dealsSaved);
 
         return $this;
     }
