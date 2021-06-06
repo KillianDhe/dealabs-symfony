@@ -1,8 +1,17 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    {% if titre is defined %}
+         {{ titre }}
+    {%  endif %}
+{% endblock %}
+
 {% block body %}
+    {% if titre is defined %}
+        <h1>{{ titre }}</h1>
+    {%  endif %}
     {% if deals is empty %}
-        <h1>Aucun deal, tristesse</h1>
+        <h2>Aucun deal, tristesse</h2>
     {% endif %}
     <div class="deals-layout">
       <div class="deals-container">
@@ -26,7 +35,4 @@
 
 {% endblock %}
 
-{% block title %}
-
-{% endblock %}
 

@@ -37,7 +37,8 @@ class GroupeController extends AbstractController
     public function displayDealsByGroupe($dealId): Response
     {
         $deals = $this->entityManager->getRepository(Deal::class)->getDealsByGroupeId($dealId);
-        return $this->render('deals.html.twig', ['deals' => $deals]);
+        $groupe = $this->entityManager->getRepository(Groupe::class)->find($dealId);
+        return $this->render('deals.html.twig', ['deals' => $deals, "titre" => "Deals du groupe ". $groupe->getNom()]);
     }
 
 }

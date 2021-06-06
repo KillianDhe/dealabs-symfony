@@ -39,7 +39,7 @@ class AccueilController extends AbstractController
         $deals = $this->entityManager->getRepository(Deal::class)->getALaUne($oneWeekAgo);
 
         $dealsHotJour = $this->entityManager->getRepository(Deal::class)->getDealsHotJour();
-        return $this->render('deals.html.twig', ['deals' => $deals,'dealsJourHot'=> $dealsHotJour]);
+        return $this->render('deals.html.twig', ['deals' => $deals,'dealsJourHot'=> $dealsHotJour,"titre"=>"Deals à la une"]);
     }
 
 
@@ -49,7 +49,7 @@ class AccueilController extends AbstractController
     public function hotBonPlans(): Response
     {
         $bonPlans = $this->entityManager->getRepository(BonPlan::class)->getHot();
-        return $this->render('deals.html.twig', ['deals' => $bonPlans]);
+        return $this->render('deals.html.twig', ['deals' => $bonPlans,"titre"=>"Bons plans hot"]);
     }
 
     /**
@@ -58,7 +58,7 @@ class AccueilController extends AbstractController
     public function hotCodePromos(): Response
     {
         $codePromos = $this->entityManager->getRepository(CodePromo::class)->getHot();
-        return $this->render('deals.html.twig', ['deals' => $codePromos]);
+        return $this->render('deals.html.twig', ['deals' => $codePromos, "titre"=>"Codes promo hot"]);
     }
 
 }

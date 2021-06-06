@@ -26,7 +26,7 @@ class AccountController extends AbstractController
     public function afficherDealsSaved()
     {
        $dealsSaved = $this->getUser()->getDealsSaved();
-       return $this->render('deals.html.twig', ['deals' => $dealsSaved]);
+       return $this->render('deals.html.twig', ['deals' => $dealsSaved, "titre" => "Deals sauvegardés"]);
 
     }
 
