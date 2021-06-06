@@ -17,5 +17,14 @@ require('@fortawesome/fontawesome-free/css/all.min.css');
 require('@fortawesome/fontawesome-free/js/all.js');
 
 // start the Stimulus application
-import './bootstrap';
 import $ from 'jquery';
+global.$ = global.jQuery = $;
+import './bootstrap';
+
+import "./js/fonctionsAjax";
+const routes = require('/public/js/fos_js_routes.json');
+import Routing from '/vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
+
+Routing.setRoutingData(routes);
+
+console.log(Routing.generate('accueil'));

@@ -1,6 +1,6 @@
 {% if deal is not empty %}
   <div class="deals-item__degrees">
-    <a class="deals-item__degrees__minus" href="{{ path('app_deal_voterMoins', {'id': deal.id}) }}"><i class="fas fa-minus"></i></a>
+    <a id="voterMoins" data-id="{{ deal.id }}" onclick="" class="deals-item__degrees__minus"><i class="fas fa-minus"></i></a>
     {{ deal.degres()|trans }}
     <a class="deals-item__degrees__plus" href="{{ path('app_deal_voterPlus', {'id': deal.id}) }}"><i class="fas fa-plus"></i></a>
   </div>

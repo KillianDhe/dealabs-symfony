@@ -85,7 +85,7 @@ class AccueilController extends AbstractController
     }
 
     /**
-     * @Route("/accueil", name="accueil")
+     * @Route("/accueil", name="accueil", options={"expose"=true})
      */
     public function displayAllDeals(): Response
     {
