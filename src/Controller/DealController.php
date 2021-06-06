@@ -31,6 +31,32 @@ class DealController extends AbstractController
 
     /**
      * @IsGranted("ROLE_USER")
+     * @Route("/signaler/{dealId}", name="app_deal_signaler")
+     */
+    public function signalerDeal(int $dealId, \Swift_Mailer $mailer)
+    {
+        $deal = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->find($dealId);
+
+        $user = $this->getUser();
+        $message = (new \Swift_Message('Deal signalé '.$dealId))
+            ->setFrom($user->getUsername())
+            ->setTo('moderation@dealabs.com')
+            ->setBody(
+                $this->renderView(
+                // templates/emails/registration.html.twig
+                    'emails/signalement.html.twig',
+                    ['deal' => $deal]
+                ),
+                'text/html'
+            );
+
+        $mailer->send($message);
+        return $this->redirectToRoute('app_deal_detail', ['id' => $dealId]);
+
+    }
+
+    /**
+     * @IsGranted("ROLE_USER")
      * @Route("/voterPlus/{id}", name="app_deal_voterPlus")
      */
     public function voterPlus(int $id): Response

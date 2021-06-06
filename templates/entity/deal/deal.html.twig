@@ -2,6 +2,7 @@
 
 {% block body %}
   <div class="deals-item">
+    <a class="btn-primary" href="{{ path('app_deal_signaler', {'dealId': deal.id}) }}">Signaler</a>
     <div class="deals-item__picture">
       <img src="{{ vich_uploader_asset(deal, 'imageFile') }}">
     </div>
