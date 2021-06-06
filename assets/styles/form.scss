@@ -34,7 +34,7 @@
   margin-top: 5px;
 }
 
-.form-group > LABEL {
+.form-group > LABEL, .form-group > LEGEND {
   font-weight: bold;
   color: #757575;
   display: flex;
@@ -82,4 +82,15 @@
 
 .form-group > DIV[id$='form'] > .form-group > .col-form-label {
   font-size: 110%;
+}
+
+.vich-image {
+
+  & > a {
+
+    & > img {
+      width: 150px;
+      height: 150px;
+    }
+  }
 }

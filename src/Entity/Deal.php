@@ -94,12 +94,18 @@ abstract class Deal
      */
     private $imageFile;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="dealsSaved")
+     */
+    private $usersSaved;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
         $this->groupes = new ArrayCollection();
         $this->partenaires = new ArrayCollection();
         $this->votes = new ArrayCollection();
+        $this->usersSaved = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -328,5 +334,32 @@ abstract class Deal
         return 'default.svg';
       }
       return $this->image;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsersSaved(): Collection
+    {
+        return $this->usersSaved;
+    }
+
+    public function addUsersSaved(User $usersSaved): self
+    {
+        if (!$this->usersSaved->contains($usersSaved)) {
+            $this->usersSaved[] = $usersSaved;
+            $usersSaved->addDealsSaved($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsersSaved(User $usersSaved): self
+    {
+        if ($this->usersSaved->removeElement($usersSaved)) {
+            $usersSaved->removeDealsSaved($this);
+        }
+
+        return $this;
     }
 }
