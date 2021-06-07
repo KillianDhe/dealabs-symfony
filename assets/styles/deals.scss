@@ -102,13 +102,17 @@ $blue: #42a5f5;
   display: grid;
   width: 100%;
   grid-template-areas:
-    "degrees degrees degrees"
+    "degrees degrees saved"
     "title title title"
     "price price price"
     "description description description"
     "comments-count comments-count link";
   grid-template-columns: 1fr 1fr auto;
   column-gap: 5px;
+
+  & > .deals-item__actions-saved {
+    margin-left: auto;
+  }
 }
 
 .deals-item__title {
@@ -236,6 +240,14 @@ $blue: #42a5f5;
 }
 .deals-item__link {
   grid-area: link;
+}
+
+.deals-item__actions {
+  margin-left: auto;
+}
+
+.deals-item__actions-saved {
+  grid-area: saved;
 }
 
 .deals-item__picture {

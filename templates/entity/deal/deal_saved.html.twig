@@ -1,0 +1,4 @@
+{% if deal is not empty %}
+  {% set dealSaved = deal in app.user.dealsSaved %}
+  <a class="deals-item__actions-saved btn btn-secondary" href="{{ path(dealSaved ? 'app_account_removeDealSaved' : 'app_account_saveDeal', {'dealId': deal.id}) }}"><i class="{{ dealSaved ? 'fas' : 'far' }} fa-bookmark"></i></a>
+{% endif %}

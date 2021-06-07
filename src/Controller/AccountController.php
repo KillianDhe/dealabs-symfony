@@ -33,7 +33,7 @@ class AccountController extends AbstractController
 
     /**
      * @IsGranted("ROLE_USER")
-     * @Route("/saveDeals/{dealId}", name="app_account_saveDeal")
+     * @Route("/saveDeal/{dealId}", name="app_account_saveDeal")
      */
     public function saveDeal(int $dealId)
     {
@@ -48,5 +48,23 @@ class AccountController extends AbstractController
         return $this->redirectToRoute('app_deal_detail', ["id" => $dealId]);
 
     }
+
+  /**
+   * @IsGranted("ROLE_USER")
+   * @Route("/removeDealSaved/{dealId}", name="app_account_removeDealSaved")
+   */
+  public function removeDealSaved(int $dealId)
+  {
+    $deal = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->find($dealId);
+    $this->getUser()->removeDealsSaved($deal);
+
+    $entityManager = $this->getDoctrine()->getManager();
+    $entityManager->persist($this->getUser());
+
+    $entityManager->flush();
+
+    return $this->redirectToRoute('app_deal_detail', ["id" => $dealId]);
+
+  }
 
 }
