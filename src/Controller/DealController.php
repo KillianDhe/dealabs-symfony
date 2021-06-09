@@ -105,6 +105,7 @@ class DealController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $bonPlan = $form->getData();
+            $bonPlan->setAuthor($this->getUser());
             $bonPlan->setDateCreation(new \DateTime('now'));
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -134,6 +135,7 @@ class DealController extends AbstractController
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
       $bonPlan = $form->getData();
+      $bonPlan->setAuthor($this->getUser());
       $bonPlan->setDateCreation(new \DateTime('now'));
 
       $entityManager = $this->getDoctrine()->getManager();
@@ -161,6 +163,7 @@ class DealController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $codePromo = $form->getData();
+            $codePromo->setAuthor($this->getUser());
             $codePromo->setDateCreation(new \DateTime('now'));
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -204,47 +207,4 @@ class DealController extends AbstractController
             'form' => $commentaireForm->createView(),
         ]);
     }
-
-
-    /**
-     * @IsGranted("ROLE_USER")
-     * @Route("/saveDeal/{id}", name="app_deal_saveDeal")
-     */
-    public function saveDeal(int $id): Response
-    {
-      /*
-      $deal = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->find($id);
-      $vote = new Vote();
-      $vote->setUtilisateur($this->getUser());
-      $vote->setDeal($deal);
-      $vote->setValeur(-1);
-      $deal->addVote($vote);
-      $entityManager = $this->getDoctrine()->getManager();
-      $entityManager->persist($vote);
-
-      $entityManager->flush();
-      */
-      return $this->redirectToRoute('app_deal_detail', ['id' => $id]);
-    }
-
-  /**
-   * @IsGranted("ROLE_USER")
-   * @Route("/removeDealSaved/{id}", name="app_deal_saveDeal")
-   */
-  public function removeDealSaved(int $id): Response
-  {
-    /*
-    $deal = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->find($id);
-    $vote = new Vote();
-    $vote->setUtilisateur($this->getUser());
-    $vote->setDeal($deal);
-    $vote->setValeur(-1);
-    $deal->addVote($vote);
-    $entityManager = $this->getDoctrine()->getManager();
-    $entityManager->persist($vote);
-
-    $entityManager->flush();
-    */
-    return $this->redirectToRoute('app_deal_detail', ['id' => $id]);
-  }
 }

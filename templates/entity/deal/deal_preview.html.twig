@@ -21,6 +21,10 @@
             <div class="deals-item__link">
                 <a class="btn btn-primary" href="{{ path('app_deal_detail', {'id': deal.id}) }}">Detail</a>
             </div>
+            {% if app.user is not empty %}
+              {% set dealsSaved = app.user.dealsSaved %}
+              {% include('entity/deal/deal_saved.html.twig') %}
+            {% endif %}
         </div>
     </div>
 {% endif %}

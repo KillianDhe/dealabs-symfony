@@ -2,13 +2,20 @@
 
 {% block body %}
   <div class="deals-item">
-    <a class="btn-primary" href="{{ path('app_deal_signaler', {'dealId': deal.id}) }}">Signaler</a>
-    <a class="btn-primary" href="{{ path('app_account_saveDeal', {'dealId': deal.id}) }}">Sauvegarder</a>
     <div class="deals-item__picture">
       <img src="{{ vich_uploader_asset(deal, 'imageFile') }}">
     </div>
     <div>
-      {% include('entity/deal/deal_degrees.html.twig') %}
+      <div style="display: flex; flex-direction: row;">
+        {% include('entity/deal/deal_degrees.html.twig') %}
+        <div class="deals-item__actions">
+          <a class="btn btn-secondary" href="{{ path('app_deal_signaler', {'dealId': deal.id}) }}">Signaler</a>
+          {% if app.user is not empty %}
+            {% set dealsSaved = app.user.dealsSaved %}
+            {% include('entity/deal/deal_saved.html.twig') %}
+          {% endif %}
+        </div>
+      </div>
       <div class="deals-item__title">{{ deal.titre }}</div>
       <div>{% include('entity/deal/deal_price.html.twig') %}</div>
       <a class="deals-item__link btn btn-primary" href="{{ deal.lienDuDeal }}"><i class="fas fa-external-link-alt"></i></a>

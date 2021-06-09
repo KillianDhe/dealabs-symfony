@@ -19,7 +19,7 @@
               {% include('entity/deal/deal_preview.html.twig') %}
           {% endfor %}
       </div>
-      {% if dealsJourHot is defined and dealsJourHot|length >= 0 %}
+      {% if dealsJourHot is defined and dealsJourHot|length > 0 %}
         <div class="deals-layout-side deals-item__shadow">
           <div class="deals-layout-side__title">
             Les deals les plus Hot <i class="fas fa-fire" style="color: #ef5350; font-size: 130%"></i>

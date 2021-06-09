@@ -99,6 +99,12 @@ abstract class Deal
      */
     private $usersSaved;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="deals")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -359,6 +365,18 @@ abstract class Deal
         if ($this->usersSaved->removeElement($usersSaved)) {
             $usersSaved->removeDealsSaved($this);
         }
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
