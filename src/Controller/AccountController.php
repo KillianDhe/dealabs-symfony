@@ -67,4 +67,15 @@ class AccountController extends AbstractController
 
   }
 
+  /**
+   * @IsGranted("ROLE_USER")
+   * @Route("/myDeals", name="app_account_myDeals")
+   */
+  public function myDeals()
+  {
+    $deals = $this->getUser()->getDeals();
+
+    return $this->render('deals.html.twig', ['deals' => $deals, "titre" => "Mes deals"]);
+  }
+
 }

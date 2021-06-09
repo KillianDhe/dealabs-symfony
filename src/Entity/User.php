@@ -59,11 +59,17 @@ class User implements UserInterface
      */
     private $dealsSaved;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Deal::class, mappedBy="author")
+     */
+    private $deals;
+
     public function __construct()
     {
         $this->votes = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->dealsSaved = new ArrayCollection();
+        $this->deals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -239,6 +245,36 @@ class User implements UserInterface
     public function removeDealsSaved(Deal $dealsSaved): self
     {
         $this->dealsSaved->removeElement($dealsSaved);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Deal[]
+     */
+    public function getDeals(): Collection
+    {
+        return $this->deals;
+    }
+
+    public function addDeal(Deal $deal): self
+    {
+        if (!$this->deals->contains($deal)) {
+            $this->deals[] = $deal;
+            $deal->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDeal(Deal $deal): self
+    {
+        if ($this->deals->removeElement($deal)) {
+            // set the owning side to null (unless already changed)
+            if ($deal->getAuthor() === $this) {
+                $deal->setAuthor(null);
+            }
+        }
 
         return $this;
     }

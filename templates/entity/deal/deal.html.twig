@@ -10,7 +10,10 @@
         {% include('entity/deal/deal_degrees.html.twig') %}
         <div class="deals-item__actions">
           <a class="btn btn-secondary" href="{{ path('app_deal_signaler', {'dealId': deal.id}) }}">Signaler</a>
-          {% include('entity/deal/deal_saved.html.twig') %}
+          {% if app.user is not empty %}
+            {% set dealsSaved = app.user.dealsSaved %}
+            {% include('entity/deal/deal_saved.html.twig') %}
+          {% endif %}
         </div>
       </div>
       <div class="deals-item__title">{{ deal.titre }}</div>
