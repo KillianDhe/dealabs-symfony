@@ -30,6 +30,16 @@ class AccueilController extends AbstractController
     }
 
     /**
+     * @Route("/accueil", name="app_accueil_rechercheDeals", options={"expose"=true})
+     */
+    public function rechercheDeals(Request $request)
+    {
+        $search = $request->query->get('search');
+        $deals = $this->entityManager->getRepository(Deal::class)->search($search);
+        return $this->render('deals.html.twig', ['deals' => $deals,"titre"=>"Resultat de la recherche"]);
+    }
+
+    /**
      * @Route("/accueil", name="accueil", options={"expose"=true})
      */
     public function displayAllDeals(): Response

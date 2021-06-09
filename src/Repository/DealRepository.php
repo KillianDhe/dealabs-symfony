@@ -93,4 +93,24 @@ class DealRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+    public function search($search)
+    {
+        return $this->createQueryBuilder('d')
+            ->where('d.Titre LIKE :search ')
+            ->setParameter('search',"%".$search."%")
+            ->orWhere('d.Description LIKE :searchD')
+            ->setParameter('searchD',"%".$search."%")
+            ->leftJoin('d.groupes', 'g')
+            ->orWhere('g.nom LIKE :searchG')
+            ->setParameter('searchG',"%".$search."%")
+            ->leftJoin('d.partenaires','p')
+            ->orWhere('p.nom LIKE :searchP')
+            ->setParameter('searchP',"%".$search."%")
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
 }

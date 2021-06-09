@@ -26,8 +26,8 @@
                 </li>
             </ul>
 
-            <form class="d-flex rightInFlex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex rightInFlex" method="get" action="{{ path("app_accueil_rechercheDeals") }}">
+                <input class="form-control me-2" name="search" type="text" placeholder="Search" aria-label="Search">
                 <button class="btn btn-labeled btn-primary" type="submit"><i class="fas fa-search"></i></button>
             </form>
 
