@@ -248,6 +248,23 @@ $blue: #42a5f5;
 
 .deals-item__actions-saved {
   grid-area: saved;
+
+  SVG * {
+    transition: all 0.3s;
+
+    vector-effect: non-scaling-stroke;
+    stroke: white;
+    stroke-width: 0;
+  }
+
+  &.js-saveDeal > SVG * {
+    fill: transparent;
+    stroke-width: 2px;
+  }
+
+  &.js-removeDealSaved > SVG * {
+
+  }
 }
 
 .deals-item__picture {

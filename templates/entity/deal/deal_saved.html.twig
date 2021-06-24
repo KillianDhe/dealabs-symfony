@@ -1,4 +1,4 @@
 {% if deal is not empty and dealsSaved is defined %}
   {% set dealSaved = deal in dealsSaved %}
-  <a class="deals-item__actions-saved btn btn-secondary" href="{{ path(dealSaved ? 'app_account_removeDealSaved' : 'app_account_saveDeal', {'dealId': deal.id}) }}"><i class="{{ dealSaved ? 'fas' : 'far' }} fa-bookmark"></i></a>
+  <div data-id="{{ deal.id }}" class="deals-item__actions-saved btn btn-secondary {{ dealSaved ? 'js-removeDealSaved' : 'js-saveDeal' }}"><i class="fas fa-bookmark"></i></div>
 {% endif %}
