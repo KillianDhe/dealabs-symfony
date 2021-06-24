@@ -117,6 +117,7 @@ class DealController extends AbstractController
 
         return $this->render('bonPlanForm.html.twig', [
             'form' => $form->createView(),
+            'deal' => new BonPlan(),
         ]);
     }
 
@@ -175,6 +176,7 @@ class DealController extends AbstractController
 
         return $this->render('CodePromoForm.html.twig', [
             'form' => $form->createView(),
+            'deal' => new CodePromo(),
         ]);
     }
 

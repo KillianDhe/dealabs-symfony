@@ -1,5 +1,5 @@
 @import '~bootstrap/scss/bootstrap.scss';
-.container > FORM {
+.appcontent .container FORM {
   padding: 10px;
   background-color: white;
   border-radius: 10px;
@@ -8,6 +8,28 @@
   display: flex;
   flex-direction: column;
   row-gap: 5px;
+}
+
+.form-container-preview {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 10px;
+
+  & > * {
+    flex: 1;
+  }
+
+  & .deals-item {
+    height: max-content;
+  }
+}
+
+@media (max-width: 767px){
+  .form-container-preview {
+    flex-direction: column;
+  }
 }
 
 .form-item > INPUT {
@@ -87,10 +109,17 @@
 .vich-image {
 
   & > a {
-
+    display: none;
     & > img {
       width: 150px;
       height: 150px;
     }
   }
+}
+
+.form-container-preview-item__title {
+  font-weight: bold;
+  font-size: 150%;
+  text-align: center;
+  margin: 5px;
 }

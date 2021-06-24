@@ -193,6 +193,11 @@ $blue: #42a5f5;
   display: flex;
   flex-direction: row;
   column-gap: 5px;
+
+  & > DIV {
+    display: flex;
+    flex-direction: row;
+  }
 }
 .deals-item__price {
   grid-area: price;
