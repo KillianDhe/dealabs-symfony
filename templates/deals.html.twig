@@ -35,13 +35,3 @@
 
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        $('document').ready(function(){
-            Vote.init();
-        });
-
-    </script>
-{% endblock %}
-
