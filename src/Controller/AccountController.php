@@ -85,15 +85,27 @@ class AccountController extends AbstractController
     public function myAccount()
     {
         $user = $this->getUser();
-        $hottestDeal = $this->entityManager->getRepository(Deal::class)->getHottestDealByUser($user->getUsername())[0]->getDegres();
+        $hottestDeal = $this->entityManager->getRepository(Deal::class)->getHottestDealByUser($user->getEmail())[0]->getDegres();
 
         $oneYearAgo = new \DateTime();
         $oneYearAgo->modify('-1 years');
 
-        $averageVotes = $this->entityManager->getRepository(Deal::class)->getAverageDealsSinceDate($this->getUser()->getUsername(),$oneYearAgo);
-        dump($averageVotes);
-        die();
+        $averageVotes = $this->entityManager->getRepository(Deal::class)->getAverageDealsSinceDate($this->getUser()->getEmail(),$oneYearAgo);
 
-        return $this->render('myAccount.html.twig', ['nbDeals' => $user->getDeals()->count(), "nbCommentaires" =>$user->getCommentaires()->count(), "hottestDeal" => $hottestDeal]);
+        // trop dur sans le les degres dans le deal , à voir.
+      //  $hotDealsPercentage = $this->entityManager->getRepository(Deal::class)->hotDealsPercentage($this->getUser()->getEmail());
+
+        return $this->render('myAccount.html.twig', ['nbDeals' => $user->getDeals()->count(), "nbCommentaires" =>$user->getCommentaires()->count(), "hottestDeal" => $hottestDeal, "averageVotes" => $averageVotes]);
+    }
+
+    /**
+     * @IsGranted("ROLE_USER")
+     * @Route("/mesBadges", name="app_account_mesBadges")
+     */
+    public function mesBadges()
+    {
+        $badges = $this->getUser()->getBadges();
+
+        return $this->render('mesBadges.html.twig', ['badges' => $badges]);
     }
 }

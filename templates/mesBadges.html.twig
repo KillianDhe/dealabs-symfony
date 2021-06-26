@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    {% if badges is empty %}
+    <h2> Aucun badge nulos </h2>
+    {% else %}
+    <h2> Mes badges </h2>
+{%  endif %}
+    {% for badge in badges %}
+    <div>
+        <p>vous avez le badge {{ badge.Nom }} : {{ badge.description }}<p>
+    </div>
+    {% endfor %}
+{% endblock %}
+

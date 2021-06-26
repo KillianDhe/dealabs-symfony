@@ -20,7 +20,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="{{ path('displayAllGroupes') }}">Groupes</a></li>
-                        <li><a class="dropdown-item" href="#">Partenaires</a></li>
+                        <li><a class="dropdown-item" href="{{path('app_partenaire_displayAll')}}">Partenaires</a></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
@@ -39,6 +39,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="right: 0; left: unset;">
                     <li><a class="dropdown-item" href={{ path('app_account_myAccount') }}>Mon compte</a></li>
+                    <li><a class="dropdown-item" href={{ path('app_account_mesBadges') }}>Mes bades</a></li>
                     <li><a class="dropdown-item" href={{ path('app_account_dealsSaved') }}>Deals sauvegardés</a></li>
                   <li><a class="dropdown-item" href="{{ path('app_account_myDeals') }}">Mes deals</a></li>
                   <li>

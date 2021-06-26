@@ -94,6 +94,22 @@ class DealRepository extends ServiceEntityRepository
             ;
     }
 
+    public function getDealsByPartenaireId($partenaireId)
+    {
+
+        return $this->createQueryBuilder('d')
+            ->leftJoin('d.votes', 'v')
+            ->addSelect('SUM(v.valeur) AS HIDDEN somme')
+            ->andWhere('p.id = :partenaireId')
+            ->setParameter('partenaireId',$partenaireId)
+            ->leftJoin('d.partenaires', 'p')
+            ->orderBy('somme',  'DESC')
+            ->groupBy('d')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     public function search($search)
     {
         return $this->createQueryBuilder('d')
@@ -128,17 +144,49 @@ class DealRepository extends ServiceEntityRepository
             ;
     }
 
-    public function getAverageDealsSinceDate($email, $dateDebut)
+    public function getAverageDealsSinceDate($email, $dateDebut) : int
     {
+        $nbDeals =  $this->createQueryBuilder('d')->select('COUNT(d) as avg')-> andWhere('author.email = :email ')->leftJoin('d.author', 'author')->setParameter('email',$email)->getQuery()->getSingleScalarResult();
+
         return $this->createQueryBuilder('d')
+            ->select('SUM(v.valeur) / :nbdeals as avg')
+            ->setParameter('nbdeals',$nbDeals)
             ->andWhere('author.email = :email ')
             ->setParameter('email',$email)
-            ->addSelect('SUM(v.valeur) AS HIDDEN somme')
             ->leftJoin('d.votes', 'v')
             ->leftJoin('d.author', 'author')
-            ->groupBy('d')
             ->getQuery()
-            ->getResult()
+            ->getSingleScalarResult()
         ;
+    }
+
+
+
+    public function hotDealsPercentage($email)
+    {
+        //marche pas, trop dur :(
+        $nbDeals = $this->createQueryBuilder('d')->select('COUNT(d)')->andWhere('author.email = :email ')->leftJoin('d.author', 'author')->setParameter('email', $email)->getQuery()->getSingleScalarResult();
+
+        return $this->createQueryBuilder('d')
+            ->select('COUNT(d.id) /:nbDeals * 100')
+            ->setParameter("nbDeals",$nbDeals)
+            ->where('somme > 100')
+            ->addSelect('SUM(v.valeur) AS HIDDEN somme')
+            ->andWhere('author.email = :email ')
+            ->setParameter('email', $email)
+            ->leftJoin('d.votes', 'v')
+            ->leftJoin('d.author', 'author')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getDealsFromDate($date)
+    {
+
+        return $this->createQueryBuilder('d')
+            ->where('d.dateCreation > :dateAgo')
+            ->setParameter('dateAgo', $date)
+            ->getQuery()
+            ->getArrayResult();
     }
 }

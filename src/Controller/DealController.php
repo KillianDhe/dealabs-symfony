@@ -8,6 +8,7 @@ use App\Entity\Commentaire;
 use App\Entity\Deal;
 use App\Entity\Vote;
 use App\Event\CommentairePlacedEvent;
+use App\Event\VotePlacedEvent;
 use App\Form\AdvertisementType;
 use App\Form\BonPlanFormType;
 use App\Form\CodePromoFormType;
@@ -69,15 +70,23 @@ class DealController extends AbstractController
     public function voterPlus(int $id): Response
     {
         $deal = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->find($id);
-        $vote = new Vote();
-        $vote->setUtilisateur($this->getUser());
-        $vote->setDeal($deal);
-        $vote->setValeur(1);
-        $deal->addVote($vote);
+        $vote = $this->entityManager->getRepository(Vote::class)->findOneBy(array("Utilisateur" => $this->getUser(), "deal" => $deal));
+        if($vote != null){
+            $vote->setValeur(1);
+            $event = new VotePlacedEvent($vote);
+            $this->eventDispatcher->dispatch($event, VotePlacedEvent::NAME);
+        }
+        else{
+            $vote = new Vote();
+            $vote->setUtilisateur($this->getUser());
+            $vote->setDeal($deal);
+            $vote->setValeur(1);
+        }
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($vote);
-
         $entityManager->flush();
+
+        $deal = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->find($id);
         return new Response($deal->getDegres());
     }
 
@@ -88,15 +97,23 @@ class DealController extends AbstractController
     public function voterMoins(int $id): Response
     {
         $deal = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->find($id);
-        $vote = new Vote();
-        $vote->setUtilisateur($this->getUser());
-        $vote->setDeal($deal);
-        $vote->setValeur(-1);
-        $deal->addVote($vote);
+        $vote = $this->entityManager->getRepository(Vote::class)->findOneBy(array("Utilisateur" => $this->getUser(), "deal" => $deal));
+        if($vote != null){
+            $vote->setValeur(-1);
+            $event = new VotePlacedEvent($vote);
+            $this->eventDispatcher->dispatch($event, VotePlacedEvent::NAME);
+        }
+        else{
+            $vote = new Vote();
+            $vote->setUtilisateur($this->getUser());
+            $vote->setDeal($deal);
+            $vote->setValeur(-1);
+        }
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($vote);
-
         $entityManager->flush();
+
         return new Response($deal->getDegres());
     }
 

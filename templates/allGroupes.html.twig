@@ -8,7 +8,7 @@
 
 {% for groupe in groupes %}
 
-    <a  href="{{ path('app_groupe_displayDealsByGroupe', {'dealId': groupe.id}) }}">{{ groupe.nom }}</a>
+    <a  href="{{ path('app_groupe_displayDealsByGroupe', {'groupeId': groupe.id}) }}">{{ groupe.nom }}</a>
 
 {% endfor %}
 

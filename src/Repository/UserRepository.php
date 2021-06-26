@@ -64,4 +64,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
     */
+
+    public function getAverageDealsSinceDate($email, $dateDebut)
+    {
+        $query = $this->createQueryBuilder('u');
+
+        return $query->select('SUM(v.valeur)/COUNT( as avg')
+            ->andWhere('author.email = :email ')
+            ->setParameter('email',$email)
+            ->leftJoin('d.votes', 'v')
+            ->leftJoin('d.author', 'author')
+            ->groupBy('d')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 }
