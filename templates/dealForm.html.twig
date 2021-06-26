@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let form = document.querySelector('FORM[name$="_form"]');
+      let preview = document.getElementsByClassName("form-container-preview")[0];
+      if (form && preview) {
+        let formName = form.getAttribute("name");
+        let inputs = document.querySelectorAll('.row > .col INPUT');
+        inputs.forEach(input => {
+          let id = input.id;
+          let variable = id.split(formName+'_')[1];
+          let variableElements = preview.querySelectorAll('.'+variable);
+          if (variableElements.length > 0) {
+            let event = "change";
+            if (input.getAttribute("type") === "text") {
+              event = "keyup";
+            }
+            if (input.getAttribute("type") === "file") {
+              input.addEventListener(event, (event) => {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                  variableElements.forEach(element => {
+                    element.setAttribute("src", e.target.result);
+                  });
+                }
+                reader.readAsDataURL(event.target.files[0]);
+              });
+            } else {
+              input.addEventListener(event, (event) => {
+                variableElements.forEach(element => {
+                  element.innerHTML = input.value;
+                });
+              });
+            }
+          }
+        })
+      }
+    });
+  </script>
+{% endblock %}
+

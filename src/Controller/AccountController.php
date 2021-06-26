@@ -9,6 +9,7 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AccountController extends AbstractController
@@ -34,9 +35,9 @@ class AccountController extends AbstractController
 
     /**
      * @IsGranted("ROLE_USER")
-     * @Route("/saveDeal/{dealId}", name="app_account_saveDeal")
+     * @Route("/saveDeal/{dealId}", name="app_account_saveDeal", options={"expose"=true})
      */
-    public function saveDeal(int $dealId)
+    public function saveDeal(int $dealId): Response
     {
         $deal = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->find($dealId);
         $this->getUser()->addDealsSaved($deal);
@@ -46,15 +47,14 @@ class AccountController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_deal_detail', ["id" => $dealId]);
-
+        return new Response();
     }
 
   /**
    * @IsGranted("ROLE_USER")
-   * @Route("/removeDealSaved/{dealId}", name="app_account_removeDealSaved")
+   * @Route("/removeDealSaved/{dealId}", name="app_account_removeDealSaved", options={"expose"=true})
    */
-  public function removeDealSaved(int $dealId)
+  public function removeDealSaved(int $dealId): Response
   {
     $deal = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->find($dealId);
     $this->getUser()->removeDealsSaved($deal);
@@ -64,8 +64,7 @@ class AccountController extends AbstractController
 
     $entityManager->flush();
 
-    return $this->redirectToRoute('app_deal_detail', ["id" => $dealId]);
-
+    return new Response();
   }
 
   /**

@@ -1,6 +1,6 @@
 {%  if deal.type == 'BonPlan' %}
-  <div class="deals-item__price"><div>{{ deal.prix }}€</div><div class="deals-item__price__default">{{ deal.prixHabituel }}€</div></div>
+  <div class="deals-item__price"><div><div class="Prix">{{ deal.prix }}</div>€</div><div class="deals-item__price__default"><div class="PrixHabituel">{{ deal.prixHabituel }}</div>€</div></div>
 {%  endif %}
 {%  if deal.type == 'CodePromo' %}
-  <div class="deals-item__reduc">-{{ deal.montant }}€</div>
+  <div class="deals-item__reduc">-<div class="Montant">{{ deal.montant }}</div>€</div>
 {%  endif %}

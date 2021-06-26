@@ -1,7 +1,9 @@
 {% if deal is not empty %}
   <div class="deals-item__degrees">
-    <a data-id="{{ deal.id }}" class="js-voterMoins deals-item__degrees__minus"><i class="fas fa-minus"></i></a>
-    {{ deal.degres()|trans }}
-    <a class="deals-item__degrees__plus" href="{{ path('app_deal_voterPlus', {'id': deal.id}) }}"><i class="fas fa-plus"></i></a>
+    <a data-id="{{ deal.id }}" class="{{ deal.id is not empty ? "js-voterMoins" : "" }} deals-item__degrees__minus"><i class="fas fa-minus"></i></a>
+    <div class="degrees">
+      {{ deal.degres()|trans }}
+    </div>
+    <a data-id="{{ deal.id }}" class="{{ deal.id is not empty ? "js-voterPlus" : "" }} deals-item__degrees__plus"><i class="fas fa-plus"></i></a>
   </div>
 {% endif %}

@@ -26,6 +26,10 @@ import Routing from '/vendor/friendsofsymfony/jsrouting-bundle/Resources/public/
 
 Routing.setRoutingData(routes);
 
+// Setting Routing as global there
+global.Routing = Routing;
+
 import "./js/Vote.js";
+import "./js/saveDeal.js";
 
 console.log(Routing.generate('accueil'));

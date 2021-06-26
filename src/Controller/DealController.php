@@ -64,7 +64,7 @@ class DealController extends AbstractController
 
     /**
      * @IsGranted("ROLE_USER")
-     * @Route("/voterPlus/{id}", name="app_deal_voterPlus")
+     * @Route("/voterPlus/{id}", name="app_deal_voterPlus", options={"expose"=true})
      */
     public function voterPlus(int $id): Response
     {
@@ -78,12 +78,12 @@ class DealController extends AbstractController
         $entityManager->persist($vote);
 
         $entityManager->flush();
-        return $this->redirectToRoute('app_deal_detail', ['id' => $id]);
+        return new Response($deal->getDegres());
     }
 
     /**
      * @IsGranted("ROLE_USER")
-     * @Route("/voterMoins/{id}", name="app_deal_voterMoins")
+     * @Route("/voterMoins/{id}", name="app_deal_voterMoins", options={"expose"=true})
      */
     public function voterMoins(int $id): Response
     {
@@ -97,7 +97,7 @@ class DealController extends AbstractController
         $entityManager->persist($vote);
 
         $entityManager->flush();
-        return $this->redirectToRoute('app_deal_detail', ['id' => $id]);
+        return new Response($deal->getDegres());
     }
 
     /**
@@ -124,6 +124,7 @@ class DealController extends AbstractController
 
         return $this->render('bonPlanForm.html.twig', [
             'form' => $form->createView(),
+            'deal' => new BonPlan(),
         ]);
     }
 
@@ -182,6 +183,7 @@ class DealController extends AbstractController
 
         return $this->render('CodePromoForm.html.twig', [
             'form' => $form->createView(),
+            'deal' => new CodePromo(),
         ]);
     }
 
