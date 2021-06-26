@@ -28,5 +28,4 @@ Routing.setRoutingData(routes);
 
 import "./js/Vote.js";
 
-
 console.log(Routing.generate('accueil'));

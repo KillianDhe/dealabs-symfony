@@ -7,6 +7,7 @@ use App\Entity\CodePromo;
 use App\Entity\Commentaire;
 use App\Entity\Deal;
 use App\Entity\Vote;
+use App\Event\CommentairePlacedEvent;
 use App\Form\AdvertisementType;
 use App\Form\BonPlanFormType;
 use App\Form\CodePromoFormType;
@@ -16,17 +17,23 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class DealController extends AbstractController
 {
     private $entityManager;
+    private $eventDispatcher;
 
-    public function __construct(EntityManagerInterface $entityManager)
+
+    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher)
     {
         $this->entityManager = $entityManager;
+        $this->eventDispatcher = $eventDispatcher;
+
     }
 
     /**
@@ -199,6 +206,10 @@ class DealController extends AbstractController
             $entityManager->persist($commentaire);
 
             $entityManager->flush();
+
+            $event = new CommentairePlacedEvent($commentaire);
+            $this->eventDispatcher->dispatch($event, CommentairePlacedEvent::NAME);
+
             return $this->redirectToRoute('app_deal_detail', ['id' => $id]);
         }
 

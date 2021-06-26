@@ -112,5 +112,33 @@ class DealRepository extends ServiceEntityRepository
             ;
     }
 
+    public function getHottestDealByUser($email)
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('author.email = :email ')
+            ->setParameter('email',$email)
+            ->addSelect('SUM(v.valeur) AS HIDDEN somme')
+            ->leftJoin('d.votes', 'v')
+            ->leftJoin('d.author', 'author')
+            ->groupBy('d')
+            ->setMaxResults(1)
+            ->orderBy('somme',  'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
+    public function getAverageDealsSinceDate($email, $dateDebut)
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('author.email = :email ')
+            ->setParameter('email',$email)
+            ->addSelect('SUM(v.valeur) AS HIDDEN somme')
+            ->leftJoin('d.votes', 'v')
+            ->leftJoin('d.author', 'author')
+            ->groupBy('d')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

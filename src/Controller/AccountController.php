@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Deal;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -78,4 +79,22 @@ class AccountController extends AbstractController
     return $this->render('deals.html.twig', ['deals' => $deals, "titre" => "Mes deals"]);
   }
 
+    /**
+     * @IsGranted("ROLE_USER")
+     * @Route("/myAccount", name="app_account_myAccount")
+     */
+    public function myAccount()
+    {
+        $user = $this->getUser();
+        $hottestDeal = $this->entityManager->getRepository(Deal::class)->getHottestDealByUser($user->getUsername())[0]->getDegres();
+
+        $oneYearAgo = new \DateTime();
+        $oneYearAgo->modify('-1 years');
+
+        $averageVotes = $this->entityManager->getRepository(Deal::class)->getAverageDealsSinceDate($this->getUser()->getUsername(),$oneYearAgo);
+        dump($averageVotes);
+        die();
+
+        return $this->render('myAccount.html.twig', ['nbDeals' => $user->getDeals()->count(), "nbCommentaires" =>$user->getCommentaires()->count(), "hottestDeal" => $hottestDeal]);
+    }
 }

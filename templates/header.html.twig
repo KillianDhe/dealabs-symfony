@@ -38,7 +38,8 @@
                   <i class="fas fa-user"></i>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="right: 0; left: unset;">
-                  <li><a class="dropdown-item" href={{ path('app_account_dealsSaved') }}>Deals sauvegardés</a></li>
+                    <li><a class="dropdown-item" href={{ path('app_account_myAccount') }}>Mon compte</a></li>
+                    <li><a class="dropdown-item" href={{ path('app_account_dealsSaved') }}>Deals sauvegardés</a></li>
                   <li><a class="dropdown-item" href="{{ path('app_account_myDeals') }}">Mes deals</a></li>
                   <li>
                     <a class="dropdown-item logoutBtn" href="{{ path('app_logout') }}">

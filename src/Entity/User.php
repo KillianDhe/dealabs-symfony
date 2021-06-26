@@ -64,12 +64,18 @@ class User implements UserInterface
      */
     private $deals;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Badge::class, inversedBy="users")
+     */
+    private $badges;
+
     public function __construct()
     {
         $this->votes = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->dealsSaved = new ArrayCollection();
         $this->deals = new ArrayCollection();
+        $this->badges = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -275,6 +281,30 @@ class User implements UserInterface
                 $deal->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Badge[]
+     */
+    public function getBadges(): Collection
+    {
+        return $this->badges;
+    }
+
+    public function addBadge(Badge $badge): self
+    {
+        if (!$this->badges->contains($badge)) {
+            $this->badges[] = $badge;
+        }
+
+        return $this;
+    }
+
+    public function removeBadge(Badge $badge): self
+    {
+        $this->badges->removeElement($badge);
 
         return $this;
     }

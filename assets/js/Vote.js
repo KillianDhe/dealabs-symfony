@@ -3,8 +3,8 @@ var Vote = {
         $(".js-voterMoins").click(function() {
             console.log("voterMoins");
 
-            //$.post(Routing.generate('app_deal_voterMoins', {id : id }), function( data ) {
-            //});
+            $.post(Routing.generate('app_deal_voterMoins', {id : $this.data("id") }), function( data ) {
+            });
         });
     }
 };
