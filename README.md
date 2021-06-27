@@ -15,12 +15,15 @@ Pour entrer dans le container apache afin d'y executer la commande:
 - `cd /var/www/lpa_sf4`
 - `composer install`
 - `chown -R www-data:www-data public/uploads`
+-`bin/console fos:js-routing:dump --format=json --target=public/js/fos_js_routes.json` Cette commande permet d'exposer les routes pour l'ajax
 
 Afin de build tout ce qui est js, css (les assets), vous devez tapez la commande `yarn install` puis `yarn encore dev` (yarn n'est pas intallé dans le container, vous pouvez sur votre machine).
 
 A ce stade, la seule chose qui devrait vous manquer est la base de données.
 Nous n'avons pas (encore) crée de fixture, vous pouvez donc soit:
+ -  Utililser le script fournit dans mysql, celui ci va vous permettre d'avoir un jeu de données afin de vous éviter de passer du temps à les creer, vous pouvez vous connecter avec example@mail.com / examplemail. Ce compte contient quelques alertres avec un fil d'alerte, des bagdes mais pas tous, des favoris, des deals crées, un tokenApi etc..
+ 
  -  repartir d'une base neuve et sans données en tapant la commande `bin/console doctrine:migrations:migrate` dans le container apache.
  
- -  utiliser la base de données que je vous joins en copie (le dossier db), qui est à copier/coller dans le dossier .docker/data  celle-ci contient déjà quelques données et vous évitera de les créer à la main. (finalement j'ai pas réussi, désolé)
+
 
