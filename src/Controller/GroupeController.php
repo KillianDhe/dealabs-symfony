@@ -32,7 +32,7 @@ class GroupeController extends AbstractController
     }
 
     /**
-     * @Route("/displayDealsByGroupe/{$groupeId}", name="app_groupe_displayDealsByGroupe")
+     * @Route("/displayDealsByGroupe/{groupeId}", name="app_groupe_displayDealsByGroupe")
      */
     public function displayDealsByGroupe($groupeId): Response
     {

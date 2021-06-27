@@ -33,7 +33,7 @@ class PartenaireController extends AbstractController
     }
 
     /**
-     * @Route("/displayDealsByPartenaire/{$partenaireId}", name="app_partenaire_displayDeals")
+     * @Route("/displayDealsByPartenaire/{partenaireId}", name="app_partenaire_displayDeals")
      */
     public function displayDealsByPartenaire($partenaireId): Response
     {
