@@ -43,10 +43,10 @@ class ApiController extends AbstractController
 
     /**
      *@IsGranted("ROLE_USER")
-     * @Route("/api/getWeeklyDeals2", name="app_api_getWeeklyDeals2")
+     * @Route("/api/private/getDealsSaved", name="getDealsSaved")
      * @Method("GET")
      */
-    public function getWeeklyDeals2(): Response
+    public function getDealsSaved(): Response
     {
         $weekAgo = new \DateTime();
         $weekAgo->modify("-7 day");

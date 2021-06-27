@@ -16,7 +16,7 @@ security:
                 property: apiToken
     firewalls:
         api_area:
-            pattern: ^/api
+            pattern: ^/api/private
             provider: api_user_provider
             guard:
                 authenticators:

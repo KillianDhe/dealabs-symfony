@@ -26,4 +26,8 @@ Nous n'avons pas (encore) crée de fixture, vous pouvez donc soit:
  -  repartir d'une base neuve et sans données en tapant la commande `bin/console doctrine:migrations:migrate` dans le container apache.
  
 
+edit : Pour tester les méthodes d'api j'ai utilisé curl : 
+
+`curl -H "X-AUTH-TOKEN: THH9R-iauJwK_aXxcIyDh8nLmw3RdMcO2Mv0TkA13Rk" http://localhost:8081/api/private/getDealsSaved`
+`curl  http://localhost:8081/api/getWeeklyDeals`
 
