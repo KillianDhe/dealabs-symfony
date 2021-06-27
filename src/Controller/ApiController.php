@@ -57,4 +57,19 @@ class ApiController extends AbstractController
         $response->headers->set("Content-Type", "application/json");
         return $response;
     }
+
+    /**
+     *@IsGranted("ROLE_USER")
+     * @Route("/generateApiToken", name="app_api_generateToken")
+     */
+    public function generateApiToken(): Response
+    {
+
+        $newToken = rtrim(strtr(base64_encode(random_bytes(32)), '+/', '-_'), '=');
+        $this->getUser()->setApiToken($newToken);
+        $this->entityManager->persist($this->getUser());
+        $this->entityManager->flush();
+        return $this->redirectToRoute("app_account_myAccount");
+    }
+
 }

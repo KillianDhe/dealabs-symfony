@@ -82,6 +82,8 @@ class AccountController extends AbstractController
     return $this->render('deals.html.twig', ['deals' => $deals, "titre" => "Mes deals", "account" => true, "MesDeals" => "active"]);
   }
 
+
+
     /**
      * @IsGranted("ROLE_USER")
      * @Route("/myStats", name="app_account_myStats")
@@ -177,9 +179,38 @@ class AccountController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_account_myAlerts');
+            return $this->redirectToRoute('app_account_myAccount');
         }
 
-        return $this->render('myAccount.html.twig',[ 'form' => $form->createView()]);
+        return $this->render('myAccount.html.twig',[ 'form' => $form->createView(), "token"=> $this->getUser()->getApiToken(), "user" => $this->getUser()]);
     }
+
+
+    /**
+     * @IsGranted("ROLE_USER")
+     * @Route("/deleteMyAccount", name="app_account_delete")
+     */
+    public function deleteAccount(Request $request)
+    {
+        $randEmail = rand()."@mail.com";
+        $user =  $this->entityManager->getRepository(User::class)->findOneBy(array("email"=>$randEmail));
+        while($user !=null){
+            $randEmail = rand()."@mail.com";
+            $user =  $this->entityManager->getRepository(User::class)->findOneBy(array("email"=>$randEmail));
+        }
+        $this->getUser()->setEmail($randEmail);
+        $this->getUser()->setIsDeleted(true);
+        $this->getUser()->setDescription("");
+        $this->getUser()->setAvatar(null);
+        $this->getUser()->setApiToken(null);
+        $this->getUser()->setPassword(rand()."");
+
+        $this->entityManager->persist($this->getUser());
+        $this->entityManager->flush();
+
+
+
+        return $this->redirectToRoute("app_logout");
+    }
+
 }

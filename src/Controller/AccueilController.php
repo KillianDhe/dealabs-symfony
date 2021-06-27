@@ -54,6 +54,17 @@ class AccueilController extends AbstractController
 
 
     /**
+     * @Route("/allDeals", name="app_deal_tous")
+     */
+    public function allDeals(): Response
+    {
+        $deals = $this->entityManager->getRepository(Deal::class)->findAll();
+
+        $dealsHotJour = $this->entityManager->getRepository(Deal::class)->getDealsHotJour();
+        return $this->render('deals.html.twig', ['deals' => $deals,'dealsJourHot'=> $dealsHotJour,"titre"=>"Tous les deals"]);
+    }
+
+    /**
      * @Route("/hotBonPlans", name="hotBonPlans")
      */
     public function hotBonPlans(): Response

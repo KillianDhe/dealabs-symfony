@@ -15,7 +15,6 @@ class UserFormType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('password')
             ->add('description')
             ->add('avatarFile', VichImageType::class, [
                 'required' => false,
