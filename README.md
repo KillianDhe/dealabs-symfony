@@ -21,7 +21,7 @@ Afin de build tout ce qui est js, css (les assets), vous devez tapez la commande
 
 A ce stade, la seule chose qui devrait vous manquer est la base de données.
 Nous n'avons pas (encore) crée de fixture, vous pouvez donc soit:
- -  Utililser le script fournit dans mysql, celui ci va vous permettre d'avoir un jeu de données afin de vous éviter de passer du temps à les creer, vous pouvez vous connecter avec example@mail.com / examplemail. Ce compte contient quelques alertres avec un fil d'alerte, des bagdes mais pas tous, des favoris, des deals crées, un tokenApi etc..
+ -  Importer le script fournit (/ScriptSQL) dans mysql, celui ci va vous permettre d'avoir un jeu de données afin de vous éviter de passer du temps à les creer, vous pouvez vous connecter avec example@mail.com / examplemail. Ce compte contient quelques alertres avec un fil d'alerte, des bagdes mais pas tous, des favoris, des deals crées, un tokenApi etc..
  
  -  repartir d'une base neuve et sans données en tapant la commande `bin/console doctrine:migrations:migrate` dans le container apache.
  
