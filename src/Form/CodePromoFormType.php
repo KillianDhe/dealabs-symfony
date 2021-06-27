@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class CodePromoFormType extends AbstractType
 {
@@ -30,6 +31,11 @@ class CodePromoFormType extends AbstractType
                     'Euros' => 'euros',
                     'Livraisaon gratuite' => 'livraison gratuite',
                 ]
+            ])
+            ->add('imageFile', VichImageType::class, [
+              'required' => false,
+              'allow_delete' => false,
+              'asset_helper' => true,
             ])
             ->add('groupes')
             ->add('partenaires')
