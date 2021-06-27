@@ -190,6 +190,19 @@ class DealRepository extends ServiceEntityRepository
             ->getArrayResult();
     }
 
+
+
+    public function getDealsSaved($email)
+    {
+
+        return $this->createQueryBuilder('d')
+            ->where('u.email = :email')
+            ->leftJoin('d.usersSaved','u')
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getArrayResult();
+    }
+
     /*public function getFavoritesDeals($user)
     {
 

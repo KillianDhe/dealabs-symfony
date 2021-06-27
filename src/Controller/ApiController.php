@@ -51,9 +51,9 @@ class ApiController extends AbstractController
         $weekAgo = new \DateTime();
         $weekAgo->modify("-7 day");
 
+        $deals = $this->entityManager->getRepository(Deal::class)->getDealsSaved($this->getUser()->getEmail());
 
-
-        $response = new Response(json_encode($this->getUser()->getDealsSaved()->toArray()));
+        $response = new Response(json_encode($deals));
         $response->headers->set("Content-Type", "application/json");
         return $response;
     }

@@ -65,6 +65,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
     */
 
+    public function findAdminsEmail()
+    {
+        return $this->createQueryBuilder('u')
+            ->select("u.email")
+            ->andWhere('u.roles LIKE :role')
+            ->setParameter('role', "%ROLE_ADMIN%")
+            ->getQuery()
+            ->getArrayResult();
+    }
+
     public function getAverageDealsSinceDate($email, $dateDebut)
     {
         $query = $this->createQueryBuilder('u');

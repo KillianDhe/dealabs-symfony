@@ -43,22 +43,26 @@ class DealController extends AbstractController
      */
     public function signalerDeal(int $dealId, \Swift_Mailer $mailer)
     {
-        $deal = $this->getDoctrine()->getRepository(\App\Entity\Deal::class)->find($dealId);
-
+        $deal = $this->entityManager->getRepository(\App\Entity\Deal::class)->find($dealId);
         $user = $this->getUser();
-        $message = (new \Swift_Message('Deal signalé '.$dealId))
-            ->setFrom($user->getUsername())
-            ->setTo('moderation@dealabs.com')
-            ->setBody(
-                $this->renderView(
-                // templates/emails/registration.html.twig
-                    'emails/signalement.html.twig',
-                    ['deal' => $deal]
-                ),
-                'text/html'
-            );
 
-        $mailer->send($message);
+        $admins =$this->entityManager->getRepository(\App\Entity\User::class)->findAdminsEmail();
+        foreach($admins as $admin){
+            $message = (new \Swift_Message('Deal signalé '.$dealId))
+                ->setFrom($user->getEmail())
+                ->setTo($admin["email"])
+                ->setBody(
+                    $this->renderView(
+                    // templates/emails/registration.html.twig
+                        'emails/signalement.html.twig',
+                        ['deal' => $deal]
+                    ),
+                    'text/html'
+                );
+            $mailer->send($message);
+        }
+
+
         return $this->redirectToRoute('app_deal_detail', ['id' => $dealId]);
 
     }
