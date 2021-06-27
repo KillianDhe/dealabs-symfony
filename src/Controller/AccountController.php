@@ -32,7 +32,7 @@ class AccountController extends AbstractController
     public function afficherDealsSaved()
     {
        $dealsSaved = $this->getUser()->getDealsSaved();
-       return $this->render('deals.html.twig', ['deals' => $dealsSaved, "titre" => "Deals sauvegardés"]);
+       return $this->render('deals.html.twig', ['deals' => $dealsSaved, "titre" => "Deals sauvegardés","account" => true, "DealsSaved" => "active"]);
 
     }
 
@@ -79,7 +79,7 @@ class AccountController extends AbstractController
   {
     $deals = $this->getUser()->getDeals();
 
-    return $this->render('deals.html.twig', ['deals' => $deals, "titre" => "Mes deals"]);
+    return $this->render('deals.html.twig', ['deals' => $deals, "titre" => "Mes deals", "account" => true, "MesDeals" => "active"]);
   }
 
     /**

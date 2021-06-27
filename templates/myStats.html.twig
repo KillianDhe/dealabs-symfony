@@ -5,6 +5,27 @@
 {% endblock %}
 
 {% block body %}
+    <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+            <a class="nav-link" href={{ path('app_account_myAccount') }}>Mon profil</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href={{ path('app_account_myStats') }}>Mes stats</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href={{ path('app_account_mesBadges') }}>Mes badges</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link "  href={{ path('app_account_dealsSaved') }}>Deals sauvegardés</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="{{ path('app_account_myDeals') }}">Mes deals</a></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_account_myAlerts') }}">Mes alertes</a>
+        </li>
+    </ul>
+
     <h2> nombre de deals postés : {{ nbDeals }}</h2>
     <h2> nombre de commentaires postés : {{ nbCommentaires }}</h2>
     <h2> Température du deal le plus hot : {{ hottestDeal }} </h2>
