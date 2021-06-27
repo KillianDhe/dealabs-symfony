@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -16,8 +17,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @Vich\Uploadable
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -99,7 +101,7 @@ class User implements UserInterface
     private $avatar;
 
     /**
-     * @Vich\UploadableField(mapping="deals_images", fileNameProperty="avatar")
+     * @Vich\UploadableField(mapping="users_images", fileNameProperty="avatar")
      * @var File
      * @Assert\File(
      *     maxSize = "1024k",
@@ -438,7 +440,7 @@ class User implements UserInterface
     /**
      * @return File
      */
-    public function getAvatarFile(): File
+    public function getAvatarFile()
     {
         return $this->avatarFile;
     }
@@ -446,7 +448,7 @@ class User implements UserInterface
     /**
      * @param File $avatarFile
      */
-    public function setAvatarFile(File $avatarFile): void
+    public function setAvatarFile(File $avatarFile = null): void
     {
         $this->avatarFile = $avatarFile;
 
@@ -459,5 +461,45 @@ class User implements UserInterface
         }
     }
 
+  public function serialize()
+  {
+    return serialize(array(
+      $this->id,
+      $this->apiToken,
+      $this->email,
+      $this->password,
+      $this->roles,
+      $this->isVerified,
+      $this->votes,
+      $this->commentaires,
+      $this->dealsSaved,
+      $this->deals,
+      $this->badges,
+      $this->alertes,
+      $this->isDeleted,
+      $this->description,
+      $this->avatar
+    ));
+  }
 
+  public function unserialize($data)
+  {
+    list (
+      $this->id,
+      $this->apiToken,
+      $this->email,
+      $this->password,
+      $this->roles,
+      $this->isVerified,
+      $this->votes,
+      $this->commentaires,
+      $this->dealsSaved,
+      $this->deals,
+      $this->badges,
+      $this->alertes,
+      $this->isDeleted,
+      $this->description,
+      $this->avatar
+      ) = unserialize($data);
+  }
 }
