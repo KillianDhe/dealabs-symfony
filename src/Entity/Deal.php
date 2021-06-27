@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\InheritanceType;
 use Doctrine\ORM\Mapping\MappedSuperclass;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -83,7 +84,7 @@ abstract class Deal
     protected $dateCreation;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
     private $image;
@@ -91,6 +92,11 @@ abstract class Deal
     /**
      * @Vich\UploadableField(mapping="deals_images", fileNameProperty="image")
      * @var File
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"image/jpeg","image/png"},
+     *     mimeTypesMessage = "veuillez donner une image (jpeg, png) de 1024ko max"
+     * )
      */
     private $imageFile;
 

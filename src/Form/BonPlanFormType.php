@@ -26,7 +26,11 @@ class BonPlanFormType extends AbstractType
             ->add('PrixHabituel')
             ->add('FraisDePort')
             ->add('isLivraisonGratuite')
-            ->add('imageFile', VichImageType::class)
+            ->add('imageFile', VichImageType::class, [
+            'required' => false,
+            'allow_delete' => false,
+            'asset_helper' => true,
+        ])
             ->add('groupes', EntityType::class, [
                 'class' => Groupe::class,
                 'choice_label' => 'nom',

@@ -189,4 +189,14 @@ class DealRepository extends ServiceEntityRepository
             ->getQuery()
             ->getArrayResult();
     }
+
+    public function getFavoritesDeals($user)
+    {
+
+        return $this->createQueryBuilder('d')
+            ->where('d.usersSaved = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getArrayResult();
+    }
 }

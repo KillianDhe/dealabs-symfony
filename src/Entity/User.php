@@ -75,6 +75,26 @@ class User implements UserInterface
      */
     private $badges;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Alerte::class, mappedBy="user")
+     */
+    private $alertes;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isDeleted;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $avatar;
+
     public function __construct()
     {
         $this->votes = new ArrayCollection();
@@ -82,6 +102,7 @@ class User implements UserInterface
         $this->dealsSaved = new ArrayCollection();
         $this->deals = new ArrayCollection();
         $this->badges = new ArrayCollection();
+        $this->alertes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -311,6 +332,72 @@ class User implements UserInterface
     public function removeBadge(Badge $badge): self
     {
         $this->badges->removeElement($badge);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Alerte[]
+     */
+    public function getAlertes(): Collection
+    {
+        return $this->alertes;
+    }
+
+    public function addAlerte(Alerte $alerte): self
+    {
+        if (!$this->alertes->contains($alerte)) {
+            $this->alertes[] = $alerte;
+            $alerte->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAlerte(Alerte $alerte): self
+    {
+        if ($this->alertes->removeElement($alerte)) {
+            // set the owning side to null (unless already changed)
+            if ($alerte->getUser() === $this) {
+                $alerte->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getIsDeleted(): ?bool
+    {
+        return $this->isDeleted;
+    }
+
+    public function setIsDeleted(?bool $isDeleted): self
+    {
+        $this->isDeleted = $isDeleted;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }
