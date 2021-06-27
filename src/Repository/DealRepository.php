@@ -144,7 +144,7 @@ class DealRepository extends ServiceEntityRepository
             ;
     }
 
-    public function getAverageDealsSinceDate($email, $dateDebut) : int
+    public function getAverageDealsSinceDate($email, $dateDebut)
     {
         $nbDeals =  $this->createQueryBuilder('d')->select('COUNT(d) as avg')-> andWhere('author.email = :email ')->leftJoin('d.author', 'author')->setParameter('email',$email)->getQuery()->getSingleScalarResult();
 

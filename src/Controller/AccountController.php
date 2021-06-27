@@ -89,12 +89,22 @@ class AccountController extends AbstractController
     public function myAccount()
     {
         $user = $this->getUser();
-        $hottestDeal = $this->entityManager->getRepository(Deal::class)->getHottestDealByUser($user->getEmail())[0]->getDegres();
+        $hottestDeal = $this->entityManager->getRepository(Deal::class)->getHottestDealByUser($user->getEmail());
+        if($hottestDeal != null){
+            $hottestDeal =$hottestDeal[0]->getDegres();
+        }
+        else{
+            $hottestDeal = "Aucun deal";
+        }
+
 
         $oneYearAgo = new \DateTime();
         $oneYearAgo->modify('-1 years');
 
         $averageVotes = $this->entityManager->getRepository(Deal::class)->getAverageDealsSinceDate($this->getUser()->getEmail(),$oneYearAgo);
+        if($averageVotes == null){
+            $averageVotes = 0;
+        }
 
         // trop dur sans le les degres dans le deal , à voir.
       //  $hotDealsPercentage = $this->entityManager->getRepository(Deal::class)->hotDealsPercentage($this->getUser()->getEmail());
