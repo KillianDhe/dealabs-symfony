@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    <h2> nombre de deals postés : {{ nbDeals }}</h2>
+    <h2> nombre de commentaires postés : {{ nbCommentaires }}</h2>
+    <h2> Température du deal le plus hot : {{ hottestDeal }} </h2>
+    <h2> Moyenne des notes des deals postés sur 1 an glissant : {{ averageVotes }} </h2>
+{% endblock %}
+

@@ -38,11 +38,14 @@
                   <i class="fas fa-user"></i>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="right: 0; left: unset;">
-                    <li><a class="dropdown-item" href={{ path('app_account_myAccount') }}>Mon compte</a></li>
-                    <li><a class="dropdown-item" href={{ path('app_account_mesBadges') }}>Mes bades</a></li>
+                    <li><a class="dropdown-item" href={{ path('app_account_myAccount') }}>Mon profil</a></li>
+                    <li><a class="dropdown-item" href={{ path('app_account_myStats') }}>Mes stats</a></li>
+                    <li><a class="dropdown-item" href={{ path('app_account_mesBadges') }}>Mes badges</a></li>
                     <li><a class="dropdown-item" href={{ path('app_account_dealsSaved') }}>Deals sauvegardés</a></li>
                   <li><a class="dropdown-item" href="{{ path('app_account_myDeals') }}">Mes deals</a></li>
-                  <li>
+                    <li><a class="dropdown-item" href="{{ path('app_account_myAlerts') }}">Mes alertes</a></li>
+
+                    <li>
                     <a class="dropdown-item logoutBtn" href="{{ path('app_logout') }}">
                       <i class="fas fa-sign-out-alt"></i>
                       Déconnexion

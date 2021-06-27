@@ -22,6 +22,7 @@ class Alerte
      */
     private $recherche;
 
+
     /**
      * @ORM\Column(type="integer")
      */
@@ -36,6 +37,11 @@ class Alerte
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="alertes")
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateCreation;
 
     public function getId(): ?int
     {
@@ -86,6 +92,18 @@ class Alerte
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->dateCreation;
+    }
+
+    public function setDateCreation(\DateTimeInterface $dateCreation): self
+    {
+        $this->dateCreation = $dateCreation;
 
         return $this;
     }

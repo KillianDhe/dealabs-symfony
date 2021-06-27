@@ -190,7 +190,7 @@ class DealRepository extends ServiceEntityRepository
             ->getArrayResult();
     }
 
-    public function getFavoritesDeals($user)
+    /*public function getFavoritesDeals($user)
     {
 
         return $this->createQueryBuilder('d')
@@ -198,5 +198,33 @@ class DealRepository extends ServiceEntityRepository
             ->setParameter('user', $user)
             ->getQuery()
             ->getArrayResult();
+    }*/
+
+    public function getDealsForAlert($alerte)
+    {
+
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.dateCreation > :dateAgo')
+            ->setParameter('dateAgo', $alerte->getDateCreation())
+            ->addSelect('SUM(v.valeur) AS HIDDEN somme')
+            ->leftJoin('d.votes', 'v')
+            ->andWhere('d.Titre LIKE :search ')
+            ->setParameter('search',"%".$alerte->getRecherche()."%")
+            ->orWhere('d.Description LIKE :searchD')
+            ->setParameter('searchD',"%".$alerte->getRecherche()."%")
+            ->leftJoin('d.groupes', 'g')
+            ->orWhere('g.nom LIKE :searchG')
+            ->setParameter('searchG',"%".$alerte->getRecherche()."%")
+            ->leftJoin('d.partenaires','p')
+            ->orWhere('p.nom LIKE :searchP')
+            ->setParameter('searchP',"%".$alerte->getRecherche()."%")
+            ->orderBy('d.dateCreation',  'DESC')
+            ->groupBy('d')
+            ->getQuery()
+            ->getResult()
+            ;
     }
+
+
+
 }

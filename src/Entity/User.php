@@ -7,7 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -94,6 +97,17 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;
+
+    /**
+     * @Vich\UploadableField(mapping="deals_images", fileNameProperty="avatar")
+     * @var File
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"image/jpeg","image/png"},
+     *     mimeTypesMessage = "veuillez donner une image (jpeg, png) de 1024ko max"
+     * )
+     */
+    private $avatarFile;
 
     public function __construct()
     {
@@ -392,6 +406,9 @@ class User implements UserInterface
 
     public function getAvatar(): ?string
     {
+        if (empty($this->avatar)) {
+            return 'default.svg';
+        }
         return $this->avatar;
     }
 
@@ -401,4 +418,38 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getApiToken()
+    {
+        return $this->apiToken;
+    }
+
+    /**
+     * @param mixed $apiToken
+     */
+    public function setApiToken($apiToken): void
+    {
+        $this->apiToken = $apiToken;
+    }
+
+    /**
+     * @return File
+     */
+    public function getAvatarFile(): File
+    {
+        return $this->avatarFile;
+    }
+
+    /**
+     * @param File $avatarFile
+     */
+    public function setAvatarFile(File $avatarFile): void
+    {
+        $this->avatarFile = $avatarFile;
+    }
+
+
 }
